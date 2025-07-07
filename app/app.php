@@ -1,33 +1,47 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
-interface DatabaseConnector
+/** @noinspection PhpUnusedPrivateFieldInspection */
+
+abstract class DatabaseConnector
 {
     /**
      * @var string
      */
-    private(set) string $url {
-        set;
-    }
+    private string $url;
     /**
      * @var string
      */
-    private(set) string $username {
-        set;
-    }
+    private string $username;
     /**
      * @var string
      */
-    private(set) string $password {
-        set;
-    }
+    private string $password;
 
-    function checkConnection(): bool;
+    /**
+     * @return bool
+     */
+    abstract protected function checkConnection(): bool;
 
-    public function newUser(string $username, string $dingtalkId, bool $isAdmin, string $userId): User;
+    /**
+     * @param string $username
+     * @param string $dingtalkId
+     * @param bool $isAdmin
+     * @param string $userId
+     * @return User
+     */
+    abstract protected function newUser(string $username, string $dingtalkId, bool $isAdmin, string $userId): User;
 
-    public function findUserByUsername(string $username): array;
+    /**
+     * @param string $username
+     * @return array
+     */
+    abstract protected function findUserByUsername(string $username): array;
 
-    public function updateUserData(User $user): bool;
+    /**
+     * @param User $user
+     * @return bool
+     */
+    abstract protected function updateUserData(User $user): bool;
 }
 
 /**
@@ -42,7 +56,7 @@ abstract class Plugin
 
     abstract public function getName(): string;
 
-    public function check()
+    public function check(): bool
     {
         if ($this->getAuthor() && $this->getVersion() && $this->getDescription() && $this->getName() && $this->getEventList()) {
             return true;
@@ -62,13 +76,13 @@ abstract class Plugin
 
 class User
 {
-    protected var string $userId;
-    protected var string $username;
-    protected var string $dingtalkId;
-    protected var bool $isAdmin;
-    protected var string $userid;
+    public var string $userId;
+    public var string $username;
+    public var string $dingtalkId;
+    public var bool $isAdmin;
+    public var string $userid;
 
-    protected function addCustomData(string $key, string $value): bool
+    public function addCustomData(string $key, string $value): bool
     {
         try {
             $this->$key = $value;
@@ -77,17 +91,20 @@ class User
             return false;
         }
     }
+
+    public array $customData;
 }
 
 # 测试代码
 
-class MySQLConnector implements DatabaseConnector
+class MySQLConnector extends DatabaseConnector
 {
     private string $url;
     private string $username;
     private string $password;
     private string $dbname;
-    private string $conn;
+    /** @noinspection PhpMissingFieldTypeInspection */
+    private $conn;
 
     public function __construct(string $url, string $username, string $password, string $dbname)
     {
@@ -98,18 +115,14 @@ class MySQLConnector implements DatabaseConnector
         $this->connect();
     }
 
-    private function connect()
+    private function connect(): void
     {
-        try {
-            $this->conn = new PDO("mysql:host=$this->url;dbname=$this->dbname", $this->username, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->createTableIfNotExists();
-        } catch (PDOException $e) {
-            throw new Exception("数据库连接失败: " . $e->getMessage());
-        }
+        $this->conn = new PDO("mysql:host=$this->url;dbname=$this->dbname", $this->username, $this->password);
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->createTableIfNotExists();
     }
 
-    private function createTableIfNotExists()
+    private function createTableIfNotExists(): void
     {
         $sql = "CREATE TABLE IF NOT EXISTS users (
             userId VARCHAR(255) PRIMARY KEY,
@@ -121,37 +134,7 @@ class MySQLConnector implements DatabaseConnector
         $this->conn->exec($sql);
     }
 
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(string $url): void
-    {
-        $this->url = $url;
-    }
-
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): void
-    {
-        $this->username = $username;
-    }
-
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
-
-    public function checkConnection()
+    public function checkConnection(): bool
     {
         return $this->conn !== null;
     }
@@ -180,29 +163,25 @@ class MySQLConnector implements DatabaseConnector
 
     public function findUserByUsername(string $username): array
     {
-        $stmt = $this->conn->prepare("SELECT * FROM users WHERE username = :username");
-        $stmt->bindParam(':username', $username);
+        $users = [];
+        $pattern = "%$username%"; //模糊匹配模式
+
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE username LIKE :pattern");
+        $stmt->bindParam(':pattern', $pattern, PDO::PARAM_STR);
         $stmt->execute();
 
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        if (!$result) {
-            return [];
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($results as $row) {
+            $user = new User();
+            $user->userId = $row['userId'];
+            $user->username = $row['username'];
+            $user->dingtalkId = $row['dingtalkId'];
+            $user->isAdmin = (bool)$row['isAdmin'];
+            $user->customData = $row['customData'];
+            $users[] = $user;
         }
 
-        $user = new User();
-        $user->userId = $result['userId'];
-        $user->username = $result['username'];
-        $user->dingtalkId = $result['dingtalkId'];
-        $user->isAdmin = (bool)$result['isAdmin'];
-
-        $customData = json_decode($result['customData'], true);
-        if (is_array($customData)) {
-            foreach ($customData as $key => $value) {
-                $user->addCustomData($key, $value);
-            }
-        }
-
-        return $user;
+        return $users;
     }
 
     public function updateUserData(User $user): bool
