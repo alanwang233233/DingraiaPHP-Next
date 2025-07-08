@@ -2,6 +2,7 @@
 
 /** @noinspection PhpUnusedPrivateFieldInspection */
 
+
 abstract class DatabaseConnector
 {
     /**
@@ -76,11 +77,11 @@ abstract class Plugin
 
 class User
 {
-    public var string $userId;
-    public var string $username;
-    public var string $dingtalkId;
-    public var bool $isAdmin;
-    public var string $userid;
+    public string $userId;
+    public string $username;
+    public string $dingtalkId;
+    public bool $isAdmin;
+    public string $userid;
 
     public function addCustomData(string $key, string $value): bool
     {
@@ -214,3 +215,7 @@ class MySQLConnector extends DatabaseConnector
         return $stmt->execute();
     }
 }
+
+$test = new MySQLConnector('192.168.0.105', 'DingaiaPHP-Next', 'k8TSkJp4czcDYPz2', 'DingaiaPHP-Next');
+echo $test->checkConnection();
+$test->newUser('2', '2', false, '2');
