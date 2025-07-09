@@ -2,6 +2,7 @@
 
 /** @noinspection PhpUnusedPrivateFieldInspection */
 
+require_once BASE_DIR . 'vendor/autoload.php';
 
 abstract class DatabaseConnector
 {
@@ -50,13 +51,22 @@ abstract class DatabaseConnector
  */
 abstract class Plugin
 {
+    /**
+     * @return string
+     */
     public function getUpdateUrl(): string
     {
         return 'https://update.example.com/' . $this->getName() . '.json';
     }
 
+    /**
+     * @return string
+     */
     abstract public function getName(): string;
 
+    /**
+     * @return bool
+     */
     public function check(): bool
     {
         if ($this->getAuthor() && $this->getVersion() && $this->getDescription() && $this->getName() && $this->getEventList()) {
@@ -66,12 +76,24 @@ abstract class Plugin
         }
     }
 
+    /**
+     * @return string
+     */
     abstract public function getAuthor(): string;
 
+    /**
+     * @return string
+     */
     abstract public function getVersion(): string;
 
+    /**
+     * @return string
+     */
     abstract public function getDescription(): string;
 
+    /**
+     * @return array
+     */
     abstract public function getEventList(): array;
 }
 
@@ -107,6 +129,12 @@ class MySQLConnector extends DatabaseConnector
     /** @noinspection PhpMissingFieldTypeInspection */
     private $conn;
 
+    /**
+     * @param string $url
+     * @param string $username
+     * @param string $password
+     * @param string $dbname
+     */
     public function __construct(string $url, string $username, string $password, string $dbname)
     {
         $this->url = $url;
@@ -116,6 +144,9 @@ class MySQLConnector extends DatabaseConnector
         $this->connect();
     }
 
+    /**
+     * @return void
+     */
     private function connect(): void
     {
         $this->conn = new PDO("mysql:host=$this->url;dbname=$this->dbname", $this->username, $this->password);
@@ -123,6 +154,9 @@ class MySQLConnector extends DatabaseConnector
         $this->createTableIfNotExists();
     }
 
+    /**
+     * @return void
+     */
     private function createTableIfNotExists(): void
     {
         $sql = "CREATE TABLE IF NOT EXISTS users (
@@ -131,15 +165,25 @@ class MySQLConnector extends DatabaseConnector
             dingtalkId VARCHAR(255) NOT NULL,
             isAdmin TINYINT(1) NOT NULL,
             customData TEXT
-        )";
+        )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
         $this->conn->exec($sql);
     }
 
+    /**
+     * @return bool
+     */
     public function checkConnection(): bool
     {
         return $this->conn !== null;
     }
 
+    /**
+     * @param string $username
+     * @param string $dingtalkId
+     * @param bool $isAdmin
+     * @param string $userId
+     * @return User
+     */
     public function newUser(string $username, string $dingtalkId, bool $isAdmin, string $userId): User
     {
         $user = new User();
@@ -162,6 +206,10 @@ class MySQLConnector extends DatabaseConnector
         return $user;
     }
 
+    /**
+     * @param string $username
+     * @return array
+     */
     public function findUserByUsername(string $username): array
     {
         $users = [];
@@ -185,6 +233,10 @@ class MySQLConnector extends DatabaseConnector
         return $users;
     }
 
+    /**
+     * @param User $user
+     * @return bool
+     */
     public function updateUserData(User $user): bool
     {
         $reflection = new ReflectionObject($user);
@@ -215,7 +267,9 @@ class MySQLConnector extends DatabaseConnector
         return $stmt->execute();
     }
 }
+/**
+ * $test = new MySQLConnector('192.168.0.105', 'DingaiaPHP-Next', 'k8TSkJp4czcDYPz2', 'DingaiaPHP-Next');
+* echo $test->checkConnection();
+* $test->newUser('2', '2', false, '2');
+ **/
 
-$test = new MySQLConnector('192.168.0.105', 'DingaiaPHP-Next', 'k8TSkJp4czcDYPz2', 'DingaiaPHP-Next');
-echo $test->checkConnection();
-$test->newUser('2', '2', false, '2');
