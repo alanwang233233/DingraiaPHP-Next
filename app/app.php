@@ -105,6 +105,11 @@ class User
     public bool $isAdmin;
     public string $userid;
 
+    /**
+     * @param string $key
+     * @param string $value
+     * @return bool
+     */
     public function addCustomData(string $key, string $value): bool
     {
         try {
