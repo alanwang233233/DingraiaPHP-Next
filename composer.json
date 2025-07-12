@@ -1,6 +1,5 @@
 {
   "require": {
-    "monolog/monolog": "^3.9",
-    "ext-pdo": "*"
+    "monolog/monolog": "^3.9"
   }
 }
