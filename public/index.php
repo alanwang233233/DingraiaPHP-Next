@@ -7,3 +7,4 @@ $test = new MySQLConnector('192.168.0.105', 'DingaiaPHP-Next', 'k8TSkJp4czcDYPz2
 $test->newUser('2', '2', false, '2');
 var_dump($test->findUserByUsername('2'));
 
+
