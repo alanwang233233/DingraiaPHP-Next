@@ -1,14 +1,9 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
 
-const BASE_DIR = '../';
-require_once BASE_DIR . 'app/app.php';
-require_once BASE_DIR . 'vendor/autoload.php';
+use App\Database\MySQLConnector;
 
-if ($_GET) {
-    if ($_GET['action'] and $_GET['client'] and $_GET['key']) {
-    } else {
-        if ($_GET['action'] = 'dingtalk') {
+$test = new MySQLConnector('192.168.0.105', 'DingaiaPHP-Next', 'k8TSkJp4czcDYPz2', 'DingaiaPHP-Next');
+$test->newUser('2', '2', false, '2');
+var_dump($test->findUserByUsername('2'));
 
-        }
-    }
-}

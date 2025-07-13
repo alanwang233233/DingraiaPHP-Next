@@ -44,14 +44,11 @@ class ClassLoader
 {
     /** @var \Closure(string):void */
     private static $includeFile;
-    /**
-     * @var array<string, self>
-     */
-    private static $registeredLoaders = array();
 
-    // PSR-4
     /** @var string|null */
     private $vendorDir;
+
+    // PSR-4
     /**
      * @var array<string, array<string, int>>
      */
@@ -60,12 +57,12 @@ class ClassLoader
      * @var array<string, list<string>>
      */
     private $prefixDirsPsr4 = array();
-
-    // PSR-0
     /**
      * @var list<string>
      */
     private $fallbackDirsPsr4 = array();
+
+    // PSR-0
     /**
      * List of PSR-0 prefixes
      *
@@ -78,20 +75,30 @@ class ClassLoader
      * @var list<string>
      */
     private $fallbackDirsPsr0 = array();
+
     /** @var bool */
     private $useIncludePath = false;
+
     /**
      * @var array<string, string>
      */
     private $classMap = array();
+
     /** @var bool */
     private $classMapAuthoritative = false;
+
     /**
      * @var array<string, bool>
      */
     private $missingClasses = array();
+
     /** @var string|null */
     private $apcuPrefix;
+
+    /**
+     * @var array<string, self>
+     */
+    private static $registeredLoaders = array();
 
     /**
      * @param string|null $vendorDir
@@ -100,38 +107,6 @@ class ClassLoader
     {
         $this->vendorDir = $vendorDir;
         self::initializeIncludeClosure();
-    }
-
-    /**
-     * @return void
-     */
-    private static function initializeIncludeClosure()
-    {
-        if (self::$includeFile !== null) {
-            return;
-        }
-
-        /**
-         * Scope isolated include.
-         *
-         * Prevents access to $this/self from included files.
-         *
-         * @param string $file
-         * @return void
-         */
-        self::$includeFile = \Closure::bind(static function ($file) {
-            include $file;
-        }, null, null);
-    }
-
-    /**
-     * Returns the currently registered loaders keyed by their corresponding vendor directories.
-     *
-     * @return array<string, self>
-     */
-    public static function getRegisteredLoaders()
-    {
-        return self::$registeredLoaders;
     }
 
     /**
@@ -196,15 +171,15 @@ class ClassLoader
      * Registers a set of PSR-0 directories for a given prefix, either
      * appending or prepending to the ones previously set for this prefix.
      *
-     * @param string $prefix The prefix
-     * @param list<string>|string $paths The PSR-0 root directories
-     * @param bool $prepend Whether to prepend the directories
+     * @param string              $prefix  The prefix
+     * @param list<string>|string $paths   The PSR-0 root directories
+     * @param bool                $prepend Whether to prepend the directories
      *
      * @return void
      */
     public function add($prefix, $paths, $prepend = false)
     {
-        $paths = (array)$paths;
+        $paths = (array) $paths;
         if (!$prefix) {
             if ($prepend) {
                 $this->fallbackDirsPsr0 = array_merge(
@@ -244,17 +219,17 @@ class ClassLoader
      * Registers a set of PSR-4 directories for a given namespace, either
      * appending or prepending to the ones previously set for this namespace.
      *
-     * @param string $prefix The prefix/namespace, with trailing '\\'
-     * @param list<string>|string $paths The PSR-4 base directories
-     * @param bool $prepend Whether to prepend the directories
+     * @param string              $prefix  The prefix/namespace, with trailing '\\'
+     * @param list<string>|string $paths   The PSR-4 base directories
+     * @param bool                $prepend Whether to prepend the directories
      *
-     * @return void
      * @throws \InvalidArgumentException
      *
+     * @return void
      */
     public function addPsr4($prefix, $paths, $prepend = false)
     {
-        $paths = (array)$paths;
+        $paths = (array) $paths;
         if (!$prefix) {
             // Register directories for the root namespace.
             if ($prepend) {
@@ -295,17 +270,17 @@ class ClassLoader
      * Registers a set of PSR-0 directories for a given prefix,
      * replacing any others previously set for this prefix.
      *
-     * @param string $prefix The prefix
-     * @param list<string>|string $paths The PSR-0 base directories
+     * @param string              $prefix The prefix
+     * @param list<string>|string $paths  The PSR-0 base directories
      *
      * @return void
      */
     public function set($prefix, $paths)
     {
         if (!$prefix) {
-            $this->fallbackDirsPsr0 = (array)$paths;
+            $this->fallbackDirsPsr0 = (array) $paths;
         } else {
-            $this->prefixesPsr0[$prefix[0]][$prefix] = (array)$paths;
+            $this->prefixesPsr0[$prefix[0]][$prefix] = (array) $paths;
         }
     }
 
@@ -313,36 +288,25 @@ class ClassLoader
      * Registers a set of PSR-4 directories for a given namespace,
      * replacing any others previously set for this namespace.
      *
-     * @param string $prefix The prefix/namespace, with trailing '\\'
-     * @param list<string>|string $paths The PSR-4 base directories
+     * @param string              $prefix The prefix/namespace, with trailing '\\'
+     * @param list<string>|string $paths  The PSR-4 base directories
      *
-     * @return void
      * @throws \InvalidArgumentException
      *
+     * @return void
      */
     public function setPsr4($prefix, $paths)
     {
         if (!$prefix) {
-            $this->fallbackDirsPsr4 = (array)$paths;
+            $this->fallbackDirsPsr4 = (array) $paths;
         } else {
             $length = strlen($prefix);
             if ('\\' !== $prefix[$length - 1]) {
                 throw new \InvalidArgumentException("A non-empty PSR-4 prefix must end with a namespace separator.");
             }
             $this->prefixLengthsPsr4[$prefix[0]][$prefix] = $length;
-            $this->prefixDirsPsr4[$prefix] = (array)$paths;
+            $this->prefixDirsPsr4[$prefix] = (array) $paths;
         }
-    }
-
-    /**
-     * Can be used to check if the autoloader uses the include path to check
-     * for classes.
-     *
-     * @return bool
-     */
-    public function getUseIncludePath()
-    {
-        return $this->useIncludePath;
     }
 
     /**
@@ -358,13 +322,14 @@ class ClassLoader
     }
 
     /**
-     * Should class lookup fail if not found in the current class map?
+     * Can be used to check if the autoloader uses the include path to check
+     * for classes.
      *
      * @return bool
      */
-    public function isClassMapAuthoritative()
+    public function getUseIncludePath()
     {
-        return $this->classMapAuthoritative;
+        return $this->useIncludePath;
     }
 
     /**
@@ -381,13 +346,13 @@ class ClassLoader
     }
 
     /**
-     * The APCu prefix in use, or null if APCu caching is not enabled.
+     * Should class lookup fail if not found in the current class map?
      *
-     * @return string|null
+     * @return bool
      */
-    public function getApcuPrefix()
+    public function isClassMapAuthoritative()
     {
-        return $this->apcuPrefix;
+        return $this->classMapAuthoritative;
     }
 
     /**
@@ -400,6 +365,16 @@ class ClassLoader
     public function setApcuPrefix($apcuPrefix)
     {
         $this->apcuPrefix = function_exists('apcu_fetch') && filter_var(ini_get('apc.enabled'), FILTER_VALIDATE_BOOLEAN) ? $apcuPrefix : null;
+    }
+
+    /**
+     * The APCu prefix in use, or null if APCu caching is not enabled.
+     *
+     * @return string|null
+     */
+    public function getApcuPrefix()
+    {
+        return $this->apcuPrefix;
     }
 
     /**
@@ -442,7 +417,7 @@ class ClassLoader
     /**
      * Loads the given class or interface.
      *
-     * @param string $class The name of the class
+     * @param  string    $class The name of the class
      * @return true|null True if loaded, null otherwise
      */
     public function loadClass($class)
@@ -474,7 +449,7 @@ class ClassLoader
             return false;
         }
         if (null !== $this->apcuPrefix) {
-            $file = apcu_fetch($this->apcuPrefix . $class, $hit);
+            $file = apcu_fetch($this->apcuPrefix.$class, $hit);
             if ($hit) {
                 return $file;
             }
@@ -488,7 +463,7 @@ class ClassLoader
         }
 
         if (null !== $this->apcuPrefix) {
-            apcu_add($this->apcuPrefix . $class, $file);
+            apcu_add($this->apcuPrefix.$class, $file);
         }
 
         if (false === $file) {
@@ -500,8 +475,18 @@ class ClassLoader
     }
 
     /**
-     * @param string $class
-     * @param string $ext
+     * Returns the currently registered loaders keyed by their corresponding vendor directories.
+     *
+     * @return array<string, self>
+     */
+    public static function getRegisteredLoaders()
+    {
+        return self::$registeredLoaders;
+    }
+
+    /**
+     * @param  string       $class
+     * @param  string       $ext
      * @return string|false
      */
     private function findFileWithExtension($class, $ext)
@@ -568,5 +553,27 @@ class ClassLoader
         }
 
         return false;
+    }
+
+    /**
+     * @return void
+     */
+    private static function initializeIncludeClosure()
+    {
+        if (self::$includeFile !== null) {
+            return;
+        }
+
+        /**
+         * Scope isolated include.
+         *
+         * Prevents access to $this/self from included files.
+         *
+         * @param  string $file
+         * @return void
+         */
+        self::$includeFile = \Closure::bind(static function($file) {
+            include $file;
+        }, null, null);
     }
 }

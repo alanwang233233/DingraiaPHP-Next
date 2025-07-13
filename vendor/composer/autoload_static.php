@@ -6,29 +6,57 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitea4ccf45160d49b2e24063883ef0d456
 {
-    public static $prefixLengthsPsr4 = array(
-        'P' =>
-            array(
-                'Psr\\Log\\' => 8,
-            ),
-        'M' =>
-            array(
-                'Monolog\\' => 8,
-            ),
+    public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
+        ),
+        'A' => 
+        array (
+            'App\\Plugin\\' => 11,
+            'App\\Database\\' => 13,
+            'App\\Controller\\' => 15,
+            'App\\Cache\\' => 10,
+            'App\\' => 4,
+        ),
     );
 
-    public static $prefixDirsPsr4 = array(
-        'Psr\\Log\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/psr/log/src',
-            ),
-        'Monolog\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
-            ),
+    public static $prefixDirsPsr4 = array (
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'App\\Plugin\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/Plugin',
+        ),
+        'App\\Database\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/Database',
+        ),
+        'App\\Controller\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/controller',
+        ),
+        'App\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/Cache',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
+        ),
     );
 
-    public static $classMap = array(
+    public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

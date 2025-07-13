@@ -1,5 +1,16 @@
 {
   "require": {
-    "monolog/monolog": "^3.9"
+    "php": ">=8.4",
+    "monolog/monolog": "^3.9",
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "App\\Cache\\": "app/Cache/",
+      "App\\Database\\": "app/Database/",
+      "App\\Plugin\\": "app/Plugin/",
+      "App\\Controller\\": "controller/"
+    }
   }
 }
