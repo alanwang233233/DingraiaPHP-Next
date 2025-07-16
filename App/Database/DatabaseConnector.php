@@ -2,7 +2,7 @@
 
 namespace App\Database;
 
-use App\User;
+use App\Models\User;
 
 abstract class DatabaseConnector
 {
@@ -24,12 +24,11 @@ abstract class DatabaseConnector
     /**
      * 新建用户
      * @param string $username
-     * @param string $dingtalkId
      * @param bool $isAdmin
      * @param string $userId
      * @return User
      */
-    abstract protected function newUser(string $username, string $dingtalkId, bool $isAdmin, string $userId): User;
+    abstract protected function newUser(string $username, bool $isAdmin, string $userId): User;
 
     /**
      * 根据用户名查找用户

@@ -2,8 +2,8 @@
 
 namespace App\Database;
 
+use App\Models\User;
 use App\Tools;
-use App\User;
 use PDO;
 use Random\RandomException;
 use ReflectionObject;
@@ -57,7 +57,6 @@ class MySQLConnector extends DatabaseConnector
                                      uid INT PRIMARY KEY UNIQUE NOT NULL AUTO_INCREMENT ,
                                      userId VARCHAR(255) NOT NULL UNIQUE,
                                      username VARCHAR(255) NOT NULL,
-                                     dingtalkId VARCHAR(255) NOT NULL UNIQUE,
                                      isAdmin BOOLEAN NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
 
@@ -76,13 +75,12 @@ class MySQLConnector extends DatabaseConnector
     /**
      * 创建新用户
      * @param string $username
-     * @param string $dingtalkId
      * @param bool $isAdmin
      * @param string $userId
      * @return User
      * @throws RandomException
      */
-    public function newUser(string $username, string $dingtalkId, bool $isAdmin, string $userId): User
+    public function newUser(string $username, bool $isAdmin, string $userId): User
     {
         $uid = $this->generateRandomInt();
         $uid = preg_replace('/[^a-zA-Z0-9_]/', '', $uid);
@@ -91,18 +89,17 @@ class MySQLConnector extends DatabaseConnector
             $uid = $this->generateRandomInt();
             $result = $this->checkUidExists($uid);
         }
-        $user = new User(0, $userId, $username, $dingtalkId, $isAdmin, []);
-        $stmt = $this->conn->prepare("INSERT INTO users (uid,userId, username, dingtalkId, isAdmin) 
-                                      VALUES (:uid,:userId, :username, :dingtalkId, :isAdmin)");
+        $user = new User($uid, $userId, $username, $isAdmin, []);
+        $stmt = $this->conn->prepare("INSERT INTO users (uid,userId, username, isAdmin) 
+                                      VALUES (:uid,:userId, :username, :isAdmin)");
         $stmt->bindParam(':uid', $uid);
         $stmt->bindParam(':userId', $userId);
         $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':dingtalkId', $dingtalkId);
         $stmt->bindParam(':isAdmin', $isAdmin, PDO::PARAM_BOOL);
         $stmt->execute();
         $stmt2 = $this->conn->prepare("SELECT * FROM users WHERE userId = " . $user->userId);
         $stmt2->execute();
-        // 修改表名，添加反引号
+        // 测试
         /*        $sql = $this->conn->prepare("CREATE TABLE IF NOT EXISTS `$uid` (
                             uid INT PRIMARY KEY NOT NULL UNIQUE ,
                             FOREIGN KEY (uid) REFERENCES users(uid)
@@ -141,7 +138,7 @@ class MySQLConnector extends DatabaseConnector
 
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($results as $row) {
-            $user = new User($row['uid'], $row['userId'], $row['username'], $row['dingtalkId'], (bool)$row['isAdmin'], []);
+            $user = new User($row['uid'], $row['userId'], $row['username'], (bool)$row['isAdmin'], []);
             /*            $uid = $row['uid'];
                         $uid = preg_replace('/[^a-zA-Z0-9_]/', '', $uid);
                         $stmt = $this->conn->prepare("SELECT * FROM `$uid` WHERE uid = :uid");
@@ -177,15 +174,14 @@ class MySQLConnector extends DatabaseConnector
 
         $stmt = $this->conn->prepare("UPDATE users 
                                       SET username = :username, 
-                                          dingtalkId = :dingtalkId, 
                                           isAdmin = :isAdmin
                                       WHERE userId = :userId");
         $stmt->bindParam(':userId', $user->userId);
         $stmt->bindParam(':username', $user->username);
-        $stmt->bindParam(':dingtalkId', $user->dingtalkId);
         $stmt->bindParam(':isAdmin', $user->isAdmin, PDO::PARAM_BOOL);
         $stmt->bindParam(':customData', $customDataJson);
 
         return $stmt->execute();
     }
 }
+

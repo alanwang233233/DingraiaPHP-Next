@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 use InvalidArgumentException;
 use Random\RandomException;
 
@@ -41,5 +40,16 @@ trait Tools
             $max = pow(10, $length) - 1;
             return random_int($min, $max);
         }
+    }
+
+    public function parseHeaders(): array
+    {
+        $headers = [];
+        foreach ($_SERVER as $name => $value) {
+            if (str_starts_with($name, 'HTTP_')) {
+                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+            }
+        }
+        return $headers;
     }
 }    

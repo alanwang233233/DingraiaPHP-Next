@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Plugin;
+namespace Plugin;
 abstract class SamplePlugin
 {
     /**

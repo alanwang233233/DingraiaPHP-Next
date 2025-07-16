@@ -6,11 +6,13 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\": "app/",
-      "App\\Cache\\": "app/Cache/",
-      "App\\Database\\": "app/Database/",
-      "App\\Plugin\\": "app/Plugin/",
-      "App\\Controller\\": "controller/"
+      "App\\": "App/",
+      "App\\Cache\\": "App/Cache/",
+      "App\\Database\\": "App/Database/",
+      "App\\Plugin\\": "App/Plugin/",
+      "App\\Controller\\": "App/Controller/",
+      "App\\Middleware\\": "App/Middleware/",
+      "App\\Models\\": "App/Models/"
     }
   }
 }

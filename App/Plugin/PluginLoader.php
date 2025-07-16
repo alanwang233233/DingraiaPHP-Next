@@ -18,7 +18,7 @@ class PluginClassLoader
 
     private function loadEnabledPlugins()
     {
-        $plugins = \App\Models\Plugin::where('status', 1)->get();
+        $plugins = \Models\Plugin::where('status', 1)->get();
         foreach ($plugins as $plugin) {
             $this->enabledPlugins[$plugin->name] = true;
         }

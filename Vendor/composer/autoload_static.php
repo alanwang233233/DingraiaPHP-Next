@@ -18,6 +18,8 @@ class ComposerStaticInitea4ccf45160d49b2e24063883ef0d456
         'A' => 
         array (
             'App\\Plugin\\' => 11,
+            'App\\Models\\' => 11,
+            'App\\Middleware\\' => 15,
             'App\\Database\\' => 13,
             'App\\Controller\\' => 15,
             'App\\Cache\\' => 10,
@@ -36,23 +38,31 @@ class ComposerStaticInitea4ccf45160d49b2e24063883ef0d456
         ),
         'App\\Plugin\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/Plugin',
+            0 => __DIR__ . '/../..' . '/App/Plugin',
+        ),
+        'App\\Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models',
+        ),
+        'App\\Middleware\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Middleware',
         ),
         'App\\Database\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/Database',
+            0 => __DIR__ . '/../..' . '/App/Database',
         ),
         'App\\Controller\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/controller',
+            0 => __DIR__ . '/../..' . '/App/Controller',
         ),
         'App\\Cache\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/Cache',
+            0 => __DIR__ . '/../..' . '/App/Cache',
         ),
         'App\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app',
+            0 => __DIR__ . '/../..' . '/App',
         ),
     );
 
