@@ -2,7 +2,9 @@
   "require": {
     "php": ">=8.4",
     "monolog/monolog": "^3.9",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "ext-pdo_mysql": "*",
+    "ext-redis": "*"
   },
   "autoload": {
     "psr-4": {
