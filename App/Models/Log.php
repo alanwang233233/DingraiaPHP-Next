@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Middleware;
-ob_start();
+namespace App\Models;
 
 use Monolog\Handler\FirePHPHandler;
 use Monolog\Handler\StreamHandler;
@@ -10,24 +9,29 @@ use Monolog\Logger;
 
 class Log
 {
-    public Logger $RequestLogger;
     public Logger $Logger;
+    private Logger $RequestLogger;
 
     public function __construct()
     {
-        $logger = new Logger('RequestLogger');
-        $logger->pushHandler(new StreamHandler('../Logs/Request.log', Level::Debug));
+        $logger = new Logger('Logger');
+        $logger->pushHandler(new StreamHandler('../../Logs/System.log', Level::Debug));
         $logger->pushHandler(new FirePHPHandler());
-        $logger->info('Request Logger Ready!');
-        $this->RequestLogger = $logger;
+        // $logger->info('Request Logger Ready!');
+        $this->Logger = $logger;
+        $RequestLogger = new Logger('RequestLogger');
+        $RequestLogger->pushHandler(new StreamHandler('../../Logs/Request.log', Level::Debug));
+        $RequestLogger->pushHandler(new FirePHPHandler());
+        // $RequestLogger->info('Request Logger Ready!');
+        $this->RequestLogger = $RequestLogger;
     }
 
-    public function Request(): void
+    public function OnRequest(): void
     {
-        $this->RequestLogger->info("OnRequest:" . $this->RequestInfo());
+        $this->RequestLogger->info("OnRequest:" /*. $this->RequestInfo()*/);
     }
 
-    private function RequestInfo(): string
+    /*private function RequestInfo(): string
     {
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
         $host = $_SERVER['HTTP_HOST'];
@@ -57,5 +61,10 @@ class Log
         ];
         header('Content-Type: application/json');
         return json_encode($requestInfo);
+    }*/
+
+    public function New(string $msg, string $level): void
+    {
+        $this->Logger->log($level, $msg);
     }
 }

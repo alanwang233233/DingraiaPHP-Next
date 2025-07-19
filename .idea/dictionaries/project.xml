@@ -5,6 +5,8 @@
       <w>dingraia</w>
       <w>dingtalk</w>
       <w>msgtype</w>
+      <w>strtolower</w>
+      <w>ucwords</w>
     </words>
   </dictionary>
 </component>
