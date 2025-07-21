@@ -19,10 +19,8 @@ const APP_PATH = '../';
 // 开启调试模式
 const APP_DEBUG = true;
 
+// 加载框架文件
+
 // 加载配置文件
 
 // 实例化框架类
-
-// 测试
-echo '123';
-
