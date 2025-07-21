@@ -4,8 +4,6 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/App" isTestSource="false" packagePrefix="App\" />
-      <sourceFolder url="file://$MODULE_DIR$/App/Cache" isTestSource="false" packagePrefix="App\Cache\" />
-      <sourceFolder url="file://$MODULE_DIR$/App/Database" isTestSource="false" packagePrefix="App\Database\" />
       <sourceFolder url="file://$MODULE_DIR$/App/Plugin" isTestSource="false" packagePrefix="App\Plugin\" />
       <sourceFolder url="file://$MODULE_DIR$/App/Controller" isTestSource="false" packagePrefix="App\Controller\" />
       <sourceFolder url="file://$MODULE_DIR$/App/Middleware" isTestSource="false" packagePrefix="App\Middleware\" />
@@ -13,6 +11,11 @@
       <sourceFolder url="file://$MODULE_DIR$/Vendor/monolog/monolog/tests/Monolog" isTestSource="true" packagePrefix="Monolog\" />
       <sourceFolder url="file://$MODULE_DIR$/Vendor/psr/log/src" isTestSource="false" packagePrefix="Psr\Log\" />
       <sourceFolder url="file://$MODULE_DIR$/App/Models" isTestSource="false" packagePrefix="App\Models\" />
+      <sourceFolder url="file://$MODULE_DIR$/App/View" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/App/Models/Cache" isTestSource="false" packagePrefix="App\Cache\" />
+      <sourceFolder url="file://$MODULE_DIR$/App/Models/Database" isTestSource="false" packagePrefix="App\Database\" />
+      <sourceFolder url="file://$MODULE_DIR$/App/Dingraia" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/App/Dingraia/Routes" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

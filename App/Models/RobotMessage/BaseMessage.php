@@ -21,9 +21,11 @@ abstract class BaseMessage
     /**
      * @throws Exception
      */
-    public function __construct()
+    public function __construct($body = 'fuck')
     {
-        $body = json_decode(file_get_contents('php://input'));
+        if ($body === 'fuck') {
+            $body = json_decode(file_get_contents('php://input'));
+        }
         $this->conversationId = $body->conversationId;
         $this->conversationType = $body->conversationType;
         $this->senderId = $body->senderId;

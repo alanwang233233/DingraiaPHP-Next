@@ -1,6 +1,6 @@
 <?php /** @noinspection PhpUnused */
 
-namespace App\Cache;
+namespace App\Models\Cache;
 
 use Exception;
 

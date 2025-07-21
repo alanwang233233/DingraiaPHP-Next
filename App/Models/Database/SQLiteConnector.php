@@ -1,6 +1,6 @@
 <?php /** @noinspection PhpUnused */
 
-namespace App\Database;
+namespace App\Models\Database;
 
 use App\Models\User;
 use PDO;
@@ -10,7 +10,6 @@ class SQLiteConnector extends DatabaseConnector
 {
     private PDO $pdo;
 
-    /** @noinspection PhpMissingParentConstructorInspection */
     public function __construct(string $dbPath)
     {
         try {
@@ -33,7 +32,7 @@ class SQLiteConnector extends DatabaseConnector
 
     protected function newUser(string $username, bool $isAdmin, string $userId): User
     {
-        $sql = "INSERT INTO users (userId, username, dingtalkId, isAdmin) VALUES (:userId, :username, :dingtalkId, :isAdmin)";
+        $sql = "INSERT INTO users (userId, username,  isAdmin) VALUES (:userId, :username, :isAdmin)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':userId', $userId);
         $stmt->bindParam(':username', $username);

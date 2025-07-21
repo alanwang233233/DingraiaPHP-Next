@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database;
+namespace App\Models\Database;
 
 use App\Models\User;
 use App\Tools;

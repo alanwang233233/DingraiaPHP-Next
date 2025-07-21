@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cache;
+namespace App\Models\Cache;
 
 use Redis;
 use RedisException;
