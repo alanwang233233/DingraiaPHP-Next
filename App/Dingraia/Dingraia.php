@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Dingraia;
+
 class Dingraia
 {
     public function run(): void
     {
         ob_start();
-        $router = new Route();
-        $router->resolve();
+        $route = new Route();
+        $router = require_once APP_PATH . 'App/Route/Route.php';
+        $router($route);
+        $route->resolve();
     }
 }

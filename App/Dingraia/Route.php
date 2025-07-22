@@ -105,8 +105,11 @@ class Route
         $requestMethod = $this->getRequestMethod();
         $requestUri = $_SERVER['REQUEST_URI'];
         $path = strtok($requestUri, '?');
+        $path = preg_replace('#^/index\.php#', '', $path);
+        $path = $path ?: '/';
 
         foreach ($this->routes as $routePath => $methods) {
+            $params = [];
             if ($this->matchRoute($routePath, $path, $params)) {
                 if (isset($methods[$requestMethod])) {
                     return $this->executeAction($methods[$requestMethod], $params);
