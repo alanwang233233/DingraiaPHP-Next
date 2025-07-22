@@ -1,67 +1,194 @@
-<?php /** @noinspection PhpUnused */
+<?php
 
 namespace App\Models\Database;
 
 use App\Models\User;
+use App\Tools;
 use PDO;
-use PDOException;
+use Random\RandomException;
+use ReflectionObject;
+use ReflectionProperty;
 
 class SQLiteConnector extends DatabaseConnector
 {
-    private PDO $pdo;
+    use Tools;
 
-    public function __construct(string $dbPath)
+    private string $url;
+    private string $username;
+    private string $password;
+    private string $dbname;
+    /** @noinspection PhpMissingFieldTypeInspection */
+    private $conn;
+
+    /**
+     * MySQLConnector
+     * @param string $dbname
+     */
+    public function __construct(string $dbname)
     {
-        try {
-            $this->pdo = new PDO('sqlite:' . $dbPath);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die("数据库连接失败: " . $e->getMessage());
-        }
+        $this->dbname = $dbname;
+        $this->connect();
     }
 
-    protected function checkConnection(): bool
+    /**
+     * 连接到数据库
+     * @return void
+     */
+    private function connect(): void
     {
-        try {
-            $this->pdo->query('SELECT 1');
-            return true;
-        } catch (PDOException) {
-            return false;
-        }
+        $this->conn = new PDO("sqlite:$this->dbname");
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->createTableIfNotExists();
     }
 
-    protected function newUser(string $username, bool $isAdmin, string $userId): User
+    /**
+     * 创建用户表
+     * @return void
+     */
+    private function createTableIfNotExists(): void
     {
-        $sql = "INSERT INTO users (userId, username,  isAdmin) VALUES (:userId, :username, :isAdmin)";
-        $stmt = $this->pdo->prepare($sql);
+        $sql = "CREATE TABLE IF NOT EXISTS users (
+    uid INTEGER PRIMARY KEY,
+    userId TEXT NOT NULL UNIQUE,
+    username TEXT NOT NULL,
+    isAdmin INTEGER NOT NULL
+)";
+
+        $this->conn->exec($sql);
+    }
+
+    /**
+     * 检查数据库连接
+     * @return bool
+     */
+    public function checkConnection(): bool
+    {
+        return $this->conn !== null;
+    }
+
+    /**
+     * 创建新用户
+     * @param string $username
+     * @param bool $isAdmin
+     * @param string $userId
+     * @return User
+     * @throws RandomException
+     */
+    public function newUser(string $username, bool $isAdmin, string $userId): User
+    {
+        $uid = $this->generateRandomInt();
+        $uid = preg_replace('/[^a-zA-Z0-9_]/', '', $uid);
+        $result = true;
+        while ($result) {
+            $uid = $this->generateRandomInt();
+            $result = $this->checkUidExists($uid);
+        }
+        $user = new User($uid, $userId, $username, $isAdmin, []);
+        $stmt = $this->conn->prepare("INSERT INTO users (uid,userId, username, isAdmin) 
+                                      VALUES (:uid,:userId, :username, :isAdmin)");
+        $stmt->bindParam(':uid', $uid);
         $stmt->bindParam(':userId', $userId);
         $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':dingtalkId', $dingtalkId);
         $stmt->bindParam(':isAdmin', $isAdmin, PDO::PARAM_BOOL);
         $stmt->execute();
+        $stmt2 = $this->conn->prepare("SELECT * FROM users WHERE userId = " . $user->userId);
+        $stmt2->execute();
+        // 测试
+        /*        $sql = $this->conn->prepare("CREATE TABLE IF NOT EXISTS `$uid` (
+                            uid INT PRIMARY KEY NOT NULL UNIQUE ,
+                            FOREIGN KEY (uid) REFERENCES users(uid)
+                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+                $sql->execute();*/
 
-        // 获取自增的 uid 并设置到 User 对象
-        $uid = $this->pdo->lastInsertId();
-        return new User($uid, $userId, $username, $isAdmin, []);
+        return $user;
     }
 
-    protected function findUserByUsername(string $username): array
+    /**
+     * 检查指定的 uid 是否存在于用户表中
+     * @param int $uid 要检查的用户唯一标识
+     * @return bool 如果 uid 存在返回 true，否则返回 false
+     */
+    public function checkUidExists(int $uid): bool
     {
-        $sql = "SELECT * FROM users WHERE username = :username";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':username', $username);
+        $stmt = $this->conn->prepare("SELECT 1 FROM users WHERE uid = :uid");
+        $stmt->bindParam(':uid', $uid, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchColumn() !== false;
     }
 
-    protected function updateUserData(User $user): bool
+    /**
+     * 检查指定的 userId 是否存在于用户表中
+     * @param string $userId 要检查的用户唯一标识
+     * @return bool 如果 uid 存在返回 true，否则返回 false
+     */
+    public function checkUserIdExists(string $userId): bool
     {
-        $sql = "UPDATE users SET userId = :userId, username = :username, isAdmin = :isAdmin WHERE uid = :uid";
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->conn->prepare("SELECT 1 FROM users WHERE userId = :userId");
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchColumn() !== false;
+    }
+
+    /**
+     * 根据用户名查找用户
+     * @param string $username
+     * @return array
+     */
+    public function findUserByUsername(string $username): array
+    {
+        $users = [];
+        $pattern = "%$username%"; //模糊匹配模式
+
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE username LIKE :pattern");
+        $stmt->bindParam(':pattern', $pattern, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($results as $row) {
+            $user = new User($row['uid'], $row['userId'], $row['username'], (bool)$row['isAdmin'], []);
+            /*            $uid = $row['uid'];
+                        $uid = preg_replace('/[^a-zA-Z0-9_]/', '', $uid);
+                        $stmt = $this->conn->prepare("SELECT * FROM `$uid` WHERE uid = :uid");
+                        $stmt->bindParam(':uid', $uid, PDO::PARAM_INT);
+                        $stmt->execute();
+                        $customData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        $user->customData = $customData;*/
+            $users[] = $user;
+        }
+
+        return $users;
+    }
+
+    /**
+     * 更新用户数据
+     * @param User $user
+     * @return bool
+     */
+    public function updateUserData(User $user): bool
+    {
+        $reflection = new ReflectionObject($user);
+        $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
+
+        $customData = [];
+        foreach ($properties as $property) {
+            $name = $property->getName();
+            if (!in_array($name, ['userId', 'username', 'dingtalkId', 'isAdmin'])) {
+                $customData[$name] = $property->getValue($user);
+            }
+        }
+
+        $customDataJson = json_encode($customData);
+
+        $stmt = $this->conn->prepare("UPDATE users 
+                                      SET username = :username, 
+                                          isAdmin = :isAdmin
+                                      WHERE userId = :userId");
         $stmt->bindParam(':userId', $user->userId);
         $stmt->bindParam(':username', $user->username);
         $stmt->bindParam(':isAdmin', $user->isAdmin, PDO::PARAM_BOOL);
-        $stmt->bindParam(':uid', $user->uid, PDO::PARAM_INT);
+        $stmt->bindParam(':customData', $customDataJson);
+
         return $stmt->execute();
     }
 }
+

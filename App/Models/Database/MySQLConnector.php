@@ -122,6 +122,7 @@ class MySQLConnector extends DatabaseConnector
         return $stmt->fetchColumn() !== false;
     }
 
+
     /**
      * 根据用户名查找用户
      * @param string $username

@@ -24,3 +24,8 @@ const APP_DEBUG = true;
 // 加载配置文件
 
 // 实例化框架类
+
+use App\Models\Database\SQLiteConnector;
+
+$test = new SQLiteConnector('test.db');
+var_dump($test->checkUserIdExists('1'));
