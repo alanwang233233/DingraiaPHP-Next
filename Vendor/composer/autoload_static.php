@@ -10,6 +10,7 @@ class ComposerStaticInitea4ccf45160d49b2e24063883ef0d456
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'Plugin\\' => 7,
         ),
         'M' => 
         array (
@@ -17,12 +18,12 @@ class ComposerStaticInitea4ccf45160d49b2e24063883ef0d456
         ),
         'A' => 
         array (
-            'App\\Plugin\\' => 11,
+            'App\\Models\\Database\\' => 20,
+            'App\\Models\\Cache\\' => 17,
             'App\\Models\\' => 11,
             'App\\Middleware\\' => 15,
-            'App\\Database\\' => 13,
+            'App\\Dingraia\\' => 13,
             'App\\Controller\\' => 15,
-            'App\\Cache\\' => 10,
             'App\\' => 4,
         ),
     );
@@ -32,13 +33,21 @@ class ComposerStaticInitea4ccf45160d49b2e24063883ef0d456
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
         ),
+        'Plugin\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Plugin',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
-        'App\\Plugin\\' => 
+        'App\\Models\\Database\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/App/Plugin',
+            0 => __DIR__ . '/../..' . '/App/Models/Database',
+        ),
+        'App\\Models\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/Cache',
         ),
         'App\\Models\\' => 
         array (
@@ -48,17 +57,13 @@ class ComposerStaticInitea4ccf45160d49b2e24063883ef0d456
         array (
             0 => __DIR__ . '/../..' . '/App/Middleware',
         ),
-        'App\\Database\\' => 
+        'App\\Dingraia\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/App/Database',
+            0 => __DIR__ . '/../..' . '/App/Dingraia',
         ),
         'App\\Controller\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/Controller',
-        ),
-        'App\\Cache\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Cache',
         ),
         'App\\' => 
         array (

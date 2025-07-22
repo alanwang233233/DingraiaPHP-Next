@@ -9,9 +9,10 @@
   "autoload": {
     "psr-4": {
       "App\\": "App/",
-      "App\\Cache\\": "App/Cache/",
-      "App\\Database\\": "App/Database/",
-      "App\\Plugin\\": "App/Plugin/",
+      "App\\Models\\Cache\\": "App/Models/Cache/",
+      "App\\Models\\Database\\": "App/Models/Database/",
+      "App\\Dingraia\\": "App/Dingraia",
+      "Plugin\\": "Plugin/",
       "App\\Controller\\": "App/Controller/",
       "App\\Middleware\\": "App/Middleware/",
       "App\\Models\\": "App/Models/"

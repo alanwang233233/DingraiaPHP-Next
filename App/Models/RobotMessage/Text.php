@@ -12,9 +12,9 @@ class Text extends BaseMessage
     /**
      * @throws Exception
      */
-    public function __construct()
+    public function __construct($body = 'fuck')
     {
-        parent::__construct();
+        parent::__construct($body);
         if ($this->msgtype !== 'text') {
             throw new Exception('msgtype must be text');
         }

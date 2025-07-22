@@ -7,12 +7,13 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
+    'Plugin\\' => array($baseDir . '/Plugin'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
-    'App\\Plugin\\' => array($baseDir . '/App/Plugin'),
+    'App\\Models\\Database\\' => array($baseDir . '/App/Models/Database'),
+    'App\\Models\\Cache\\' => array($baseDir . '/App/Models/Cache'),
     'App\\Models\\' => array($baseDir . '/App/Models'),
     'App\\Middleware\\' => array($baseDir . '/App/Middleware'),
-    'App\\Database\\' => array($baseDir . '/App/Database'),
+    'App\\Dingraia\\' => array($baseDir . '/App/Dingraia'),
     'App\\Controller\\' => array($baseDir . '/App/Controller'),
-    'App\\Cache\\' => array($baseDir . '/App/Cache'),
     'App\\' => array($baseDir . '/App'),
 );
