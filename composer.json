@@ -18,5 +18,8 @@
       "App\\Middleware\\": "App/Middleware/",
       "App\\Models\\": "App/Models/"
     }
+  },
+  "config": {
+    "vendor-dir": "Vendor"
   }
 }
