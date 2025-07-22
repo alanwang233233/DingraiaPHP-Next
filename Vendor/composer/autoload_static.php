@@ -18,6 +18,7 @@ class ComposerStaticInitea4ccf45160d49b2e24063883ef0d456
         ),
         'A' => 
         array (
+            'App\\Route\\' => 10,
             'App\\Models\\Database\\' => 20,
             'App\\Models\\Cache\\' => 17,
             'App\\Models\\' => 11,
@@ -40,6 +41,10 @@ class ComposerStaticInitea4ccf45160d49b2e24063883ef0d456
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'App\\Route\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Route',
         ),
         'App\\Models\\Database\\' => 
         array (

@@ -12,6 +12,7 @@
       "App\\Models\\Cache\\": "App/Models/Cache/",
       "App\\Models\\Database\\": "App/Models/Database/",
       "App\\Dingraia\\": "App/Dingraia",
+      "App\\Route\\": "App/Route/",
       "Plugin\\": "Plugin/",
       "App\\Controller\\": "App/Controller/",
       "App\\Middleware\\": "App/Middleware/",
