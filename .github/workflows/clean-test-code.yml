@@ -12,7 +12,6 @@ jobs:
         run: |
           # 删除指定测试相关目录
           rm -rf Vendor/bin/ \
-                 Vendor/composer/ \
                  Vendor/myclabs/ \
                  Vendor/nikic/ \
                  Vendor/phar-io/ \
