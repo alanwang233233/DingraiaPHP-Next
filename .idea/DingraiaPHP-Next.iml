@@ -15,6 +15,10 @@
       <sourceFolder url="file://$MODULE_DIR$/Old-Vendor/monolog/monolog/tests/Monolog" isTestSource="true" packagePrefix="Monolog\" />
       <sourceFolder url="file://$MODULE_DIR$/Old-Vendor/psr/log/src" isTestSource="false" packagePrefix="Psr\Log\" />
       <sourceFolder url="file://$MODULE_DIR$/Plugin" isTestSource="false" packagePrefix="Plugin\" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/twig/twig" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

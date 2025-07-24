@@ -4,7 +4,8 @@
     "monolog/monolog": "^3.9",
     "ext-pdo": "*",
     "ext-pdo_mysql": "*",
-    "ext-redis": "*"
+    "ext-redis": "*",
+    "twig/twig": "^3.21"
   },
   "autoload": {
     "psr-4": {
