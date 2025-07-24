@@ -25,6 +25,31 @@
       <path value="$PROJECT_DIR$/vendor/psr/log" />
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/Vendor/staabm/side-effects-detector" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/Vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/Vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/Vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/Vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/Vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/Vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/Vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/Vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/Vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/Vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/Vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/Vendor/myclabs/deep-copy" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />

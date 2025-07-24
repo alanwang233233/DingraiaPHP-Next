@@ -8,7 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'Plugin\\' => array($baseDir . '/Plugin'),
+    'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'App\\Route\\' => array($baseDir . '/App/Route'),
     'App\\Models\\Database\\' => array($baseDir . '/App/Models/Database'),
     'App\\Models\\Cache\\' => array($baseDir . '/App/Models/Cache'),

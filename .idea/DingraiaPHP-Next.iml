@@ -15,6 +15,34 @@
       <sourceFolder url="file://$MODULE_DIR$/Old-Vendor/monolog/monolog/tests/Monolog" isTestSource="true" packagePrefix="Monolog\" />
       <sourceFolder url="file://$MODULE_DIR$/Old-Vendor/psr/log/src" isTestSource="false" packagePrefix="Psr\Log\" />
       <sourceFolder url="file://$MODULE_DIR$/Plugin" isTestSource="false" packagePrefix="Plugin\" />
+      <sourceFolder url="file://$MODULE_DIR$/Vendor/monolog/monolog/src/Monolog" isTestSource="false" packagePrefix="Monolog\" />
+      <sourceFolder url="file://$MODULE_DIR$/Vendor/monolog/monolog/tests/Monolog" isTestSource="true" packagePrefix="Monolog\" />
+      <sourceFolder url="file://$MODULE_DIR$/Vendor/psr/log/src" isTestSource="false" packagePrefix="Psr\Log\" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/nikic/php-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/phar-io/manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/phar-io/version" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/phpunit/php-code-coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/phpunit/php-file-iterator" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/phpunit/php-invoker" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/phpunit/php-text-template" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/phpunit/php-timer" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/phpunit/phpunit" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/cli-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/comparator" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/complexity" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/diff" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/environment" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/global-state" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/lines-of-code" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/object-enumerator" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/object-reflector" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/recursion-context" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/type" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/staabm/side-effects-detector" />
+      <excludeFolder url="file://$MODULE_DIR$/Vendor/theseer/tokenizer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

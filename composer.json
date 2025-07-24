@@ -21,5 +21,8 @@
   },
   "config": {
     "vendor-dir": "Vendor"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^12.2"
   }
 }
