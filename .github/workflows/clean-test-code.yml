@@ -1,0 +1,29 @@
+name: Clean Vendor Test Code
+on:
+  pull_request:
+    branches: [ main ] # 监听合并到 main 分支的 PR
+jobs:
+  clean-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Remove test-related directories in Vendor
+        run: |
+          # 删除指定测试相关目录
+          rm -rf Vendor/bin/ \
+                 Vendor/composer/ \
+                 Vendor/myclabs/ \
+                 Vendor/nikic/ \
+                 Vendor/phar-io/ \
+                 Vendor/phpunit/ \
+                 Vendor/sebastian/ \
+                 Vendor/staabm/ \
+                 Vendor/theseer/
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add Vendor/
+          git commit -m "Auto clean test-related code in Vendor"
+          git push
