@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection SpellCheckingInspection */
 
 namespace App\Dingraia;
 
@@ -11,5 +11,10 @@ class Dingraia
         $router = require_once APP_PATH . 'App/Route/Route.php';
         $router($route);
         $route->resolve();
+    }
+
+    public function s()
+    {
+
     }
 }

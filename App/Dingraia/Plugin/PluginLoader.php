@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Dingraia\Plugin;
+
 use Composer\Autoload\ClassLoader;
 
 class PluginClassLoader

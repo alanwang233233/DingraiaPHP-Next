@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin;
+namespace App\Dingraia\Plugin;
 abstract class SamplePlugin
 {
     /**

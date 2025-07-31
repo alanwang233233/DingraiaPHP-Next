@@ -5,7 +5,8 @@
     "ext-pdo": "*",
     "ext-pdo_mysql": "*",
     "ext-redis": "*",
-    "twig/twig": "^3.21"
+    "twig/twig": "^3.21",
+    "ext-curl": "*"
   },
   "autoload": {
     "psr-4": {
@@ -13,7 +14,6 @@
       "App\\Models\\Cache\\": "App/Models/Cache/",
       "App\\Models\\Database\\": "App/Models/Database/",
       "App\\Dingraia\\": "App/Dingraia",
-      "App\\Route\\": "App/Route/",
       "Plugin\\": "Plugin/",
       "App\\Controller\\": "App/Controller/",
       "App\\Middleware\\": "App/Middleware/",
@@ -22,5 +22,9 @@
   },
   "config": {
     "vendor-dir": "Vendor"
+  },
+  "suggest": {
+    "workerman/workerman": "添加Stream支持",
+    "workerman/http-client": "添加Stream支持"
   }
 }

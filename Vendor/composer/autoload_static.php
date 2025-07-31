@@ -6,10 +6,38 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit122db3f3af647d469d07097c5a127bfa
 {
+    public static $files = array (
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'f88f8987adfe3f7cf9978fa9a9d148bc' => __DIR__ . '/..' . '/workerman/psr7/src/functions_include.php',
+        '89efb1254ef2d1c5d80096acd12c4098' => __DIR__ . '/..' . '/twig/twig/src/Resources/core.php',
+        'ffecb95d45175fd40f75be8a23b34f90' => __DIR__ . '/..' . '/twig/twig/src/Resources/debug.php',
+        'c7baa00073ee9c61edf148c51917cfb4' => __DIR__ . '/..' . '/twig/twig/src/Resources/escaper.php',
+        'f844ccf1d25df8663951193c3fc307c8' => __DIR__ . '/..' . '/twig/twig/src/Resources/string_loader.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'Workerman\\Psr7\\' => 15,
+            'Workerman\\Http\\' => 15,
+            'Workerman\\Coroutine\\' => 20,
+            'Workerman\\' => 10,
+        ),
+        'T' => 
+        array (
+            'Twig\\' => 5,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
             'Plugin\\' => 7,
         ),
         'M' => 
@@ -18,7 +46,6 @@ class ComposerStaticInit122db3f3af647d469d07097c5a127bfa
         ),
         'A' => 
         array (
-            'App\\Route\\' => 10,
             'App\\Models\\Database\\' => 20,
             'App\\Models\\Cache\\' => 17,
             'App\\Models\\' => 11,
@@ -30,9 +57,42 @@ class ComposerStaticInit122db3f3af647d469d07097c5a127bfa
     );
 
     public static $prefixDirsPsr4 = array (
+        'Workerman\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/psr7/src',
+        ),
+        'Workerman\\Http\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/http-client/src',
+        ),
+        'Workerman\\Coroutine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/coroutine/src',
+        ),
+        'Workerman\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/workerman/src',
+            1 => __DIR__ . '/..' . '/workerman/coroutine/src',
+        ),
+        'Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Plugin\\' => 
         array (
@@ -41,10 +101,6 @@ class ComposerStaticInit122db3f3af647d469d07097c5a127bfa
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
-        ),
-        'App\\Route\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Route',
         ),
         'App\\Models\\Database\\' => 
         array (

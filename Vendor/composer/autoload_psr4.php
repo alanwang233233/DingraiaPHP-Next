@@ -6,10 +6,17 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Workerman\\Psr7\\' => array($vendorDir . '/workerman/psr7/src'),
+    'Workerman\\Http\\' => array($vendorDir . '/workerman/http-client/src'),
+    'Workerman\\Coroutine\\' => array($vendorDir . '/workerman/coroutine/src'),
+    'Workerman\\' => array($vendorDir . '/workerman/workerman/src', $vendorDir . '/workerman/coroutine/src'),
+    'Twig\\' => array($vendorDir . '/twig/twig/src'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Plugin\\' => array($baseDir . '/Plugin'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
-    'App\\Route\\' => array($baseDir . '/App/Route'),
     'App\\Models\\Database\\' => array($baseDir . '/App/Models/Database'),
     'App\\Models\\Cache\\' => array($baseDir . '/App/Models/Cache'),
     'App\\Models\\' => array($baseDir . '/App/Models'),
