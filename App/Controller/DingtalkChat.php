@@ -3,9 +3,8 @@
 namespace App\Controller;
 class DingtalkChat
 {
-    public function main(): string
+    public function main(): void
     {
         echo 'DingtalkChat';
-        return 'DingtalkChat';
     }
 }

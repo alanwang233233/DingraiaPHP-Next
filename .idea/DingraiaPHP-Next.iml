@@ -10,11 +10,10 @@
       <sourceFolder url="file://$MODULE_DIR$/App/Models/Cache" isTestSource="false" packagePrefix="App\Models\Cache\" />
       <sourceFolder url="file://$MODULE_DIR$/App/Models/Database" isTestSource="false" packagePrefix="App\Models\Database\" />
       <sourceFolder url="file://$MODULE_DIR$/App/Dingraia" isTestSource="false" packagePrefix="App\Dingraia\" />
-      <sourceFolder url="file://$MODULE_DIR$/App/Route" isTestSource="false" packagePrefix="App\Route\" />
-      <sourceFolder url="file://$MODULE_DIR$/Old-Vendor/monolog/monolog/src/Monolog" isTestSource="false" packagePrefix="Monolog\" />
-      <sourceFolder url="file://$MODULE_DIR$/Old-Vendor/monolog/monolog/tests/Monolog" isTestSource="true" packagePrefix="Monolog\" />
-      <sourceFolder url="file://$MODULE_DIR$/Old-Vendor/psr/log/src" isTestSource="false" packagePrefix="Psr\Log\" />
       <sourceFolder url="file://$MODULE_DIR$/Plugin" isTestSource="false" packagePrefix="Plugin\" />
+      <sourceFolder url="file://$MODULE_DIR$/Vendor/monolog/monolog/src/Monolog" isTestSource="false" packagePrefix="Monolog\" />
+      <sourceFolder url="file://$MODULE_DIR$/Vendor/monolog/monolog/tests/Monolog" isTestSource="true" packagePrefix="Monolog\" />
+      <sourceFolder url="file://$MODULE_DIR$/Vendor/psr/log/src" isTestSource="false" packagePrefix="Psr\Log\" />
       <excludeFolder url="file://$MODULE_DIR$/Vendor/symfony/deprecation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/Vendor/symfony/polyfill-ctype" />
       <excludeFolder url="file://$MODULE_DIR$/Vendor/symfony/polyfill-mbstring" />

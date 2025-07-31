@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "dc77f6f3f1bc43f8e55ebdd4b94b9c52",
+  "content-hash": "ec44401a3711a0f1ddf2198d365de789",
   "packages": [
     {
       "name": "monolog/monolog",
@@ -108,6 +108,59 @@
         }
       ],
       "time": "2025-03-24T10:02:05+00:00"
+    },
+    {
+      "name": "psr/http-message",
+      "version": "2.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/php-fig/http-message.git",
+        "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+        "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+        "shasum": ""
+      },
+      "require": {
+        "php": "^7.2 || ^8.0"
+      },
+      "type": "library",
+      "extra": {
+        "branch-alias": {
+          "dev-master": "2.0.x-dev"
+        }
+      },
+      "autoload": {
+        "psr-4": {
+          "Psr\\Http\\Message\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "PHP-FIG",
+          "homepage": "https://www.php-fig.org/"
+        }
+      ],
+      "description": "Common interface for HTTP messages",
+      "homepage": "https://github.com/php-fig/http-message",
+      "keywords": [
+        "http",
+        "http-message",
+        "psr",
+        "psr-7",
+        "request",
+        "response"
+      ],
+      "support": {
+        "source": "https://github.com/php-fig/http-message/tree/2.0"
+      },
+      "time": "2023-04-04T09:54:51+00:00"
     },
     {
       "name": "psr/log",
@@ -464,6 +517,223 @@
         }
       ],
       "time": "2025-05-03T07:21:55+00:00"
+    },
+    {
+      "name": "workerman/coroutine",
+      "version": "v1.1.3",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/workerman-php/coroutine.git",
+        "reference": "df8fc428967d512a74a8a7d80355c1d40228c9fa"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/workerman-php/coroutine/zipball/df8fc428967d512a74a8a7d80355c1d40228c9fa",
+        "reference": "df8fc428967d512a74a8a7d80355c1d40228c9fa",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=8.1"
+      },
+      "require-dev": {
+        "phpunit/phpunit": "^11.0",
+        "psr/log": "*"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "Workerman\\": "src",
+          "Workerman\\Coroutine\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "description": "Workerman coroutine",
+      "support": {
+        "issues": "https://github.com/workerman-php/coroutine/issues",
+        "source": "https://github.com/workerman-php/coroutine/tree/v1.1.3"
+      },
+      "time": "2025-02-17T03:34:21+00:00"
+    },
+    {
+      "name": "workerman/http-client",
+      "version": "v3.0.4",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/workerman-php/http-client.git",
+        "reference": "76d30879f7a70f99a0c5434e0ca5055831cc12e1"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/workerman-php/http-client/zipball/76d30879f7a70f99a0c5434e0ca5055831cc12e1",
+        "reference": "76d30879f7a70f99a0c5434e0ca5055831cc12e1",
+        "shasum": ""
+      },
+      "require": {
+        "workerman/psr7": ">=1.4.3",
+        "workerman/workerman": "^5.1 || dev-master"
+      },
+      "require-dev": {
+        "phpunit/phpunit": "^11.0",
+        "revolt/event-loop": "^1.0"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "Workerman\\Http\\": "./src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "homepage": "https://www.workerman.net",
+      "support": {
+        "issues": "https://github.com/workerman-php/http-client/issues",
+        "source": "https://github.com/workerman-php/http-client/tree/v3.0.4"
+      },
+      "time": "2025-06-25T11:32:13+00:00"
+    },
+    {
+      "name": "workerman/psr7",
+      "version": "v2.0.2",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/walkor/psr7.git",
+        "reference": "5f5b65e2462cd408f738cc967a80d8c15f9b57f3"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/walkor/psr7/zipball/5f5b65e2462cd408f738cc967a80d8c15f9b57f3",
+        "reference": "5f5b65e2462cd408f738cc967a80d8c15f9b57f3",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=7.2.0",
+        "psr/http-message": "~2.0"
+      },
+      "provide": {
+        "psr/http-message-implementation": "1.0"
+      },
+      "require-dev": {
+        "phpunit/phpunit": "~4.0"
+      },
+      "type": "library",
+      "autoload": {
+        "files": [
+          "src/functions_include.php"
+        ],
+        "psr-4": {
+          "Workerman\\Psr7\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "Michael Dowling",
+          "email": "mtdowling@gmail.com",
+          "homepage": "https://github.com/mtdowling"
+        },
+        {
+          "name": "Tobias Schultze",
+          "homepage": "https://github.com/Tobion"
+        }
+      ],
+      "description": "PSR-7 message implementation that also provides common utility methods",
+      "keywords": [
+        "http",
+        "message",
+        "request",
+        "response",
+        "stream",
+        "uri",
+        "url"
+      ],
+      "support": {
+        "source": "https://github.com/walkor/psr7/tree/v2.0.2"
+      },
+      "time": "2025-03-06T12:00:37+00:00"
+    },
+    {
+      "name": "workerman/workerman",
+      "version": "v5.1.3",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/walkor/workerman.git",
+        "reference": "371f3a5decb28f1bd3464ae26d47ea1a4cf0a3c5"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/walkor/workerman/zipball/371f3a5decb28f1bd3464ae26d47ea1a4cf0a3c5",
+        "reference": "371f3a5decb28f1bd3464ae26d47ea1a4cf0a3c5",
+        "shasum": ""
+      },
+      "require": {
+        "ext-json": "*",
+        "php": ">=8.1",
+        "workerman/coroutine": "^1.1 || dev-main"
+      },
+      "conflict": {
+        "ext-swow": "<v1.0.0"
+      },
+      "require-dev": {
+        "guzzlehttp/guzzle": "^7.0",
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "2.x-dev",
+        "phpstan/phpstan": "1.11.x-dev"
+      },
+      "suggest": {
+        "ext-event": "For better performance. "
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "Workerman\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "walkor",
+          "email": "walkor@workerman.net",
+          "homepage": "https://www.workerman.net",
+          "role": "Developer"
+        }
+      ],
+      "description": "An asynchronous event driven PHP framework for easily building fast, scalable network applications.",
+      "homepage": "https://www.workerman.net",
+      "keywords": [
+        "asynchronous",
+        "event-loop",
+        "framework",
+        "http"
+      ],
+      "support": {
+        "email": "walkor@workerman.net",
+        "forum": "https://www.workerman.net/questions",
+        "issues": "https://github.com/walkor/workerman/issues",
+        "source": "https://github.com/walkor/workerman",
+        "wiki": "https://www.workerman.net/doc/workerman/"
+      },
+      "funding": [
+        {
+          "url": "https://opencollective.com/workerman",
+          "type": "open_collective"
+        },
+        {
+          "url": "https://www.patreon.com/walkor",
+          "type": "patreon"
+        }
+      ],
+      "time": "2025-06-12T13:34:04+00:00"
     }
   ],
   "packages-dev": [],

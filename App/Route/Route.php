@@ -1,8 +1,7 @@
-<?php
+<?php /** @noinspection PhpFullyQualifiedNameUsageInspection */
 
 namespace App\Route;
 
-use App\Controller\DingtalkChat;
 use App\Dingraia\Route;
 
 /**
@@ -13,6 +12,6 @@ return function (Route $router) {
     $router->map('GET', '/', function () {
         echo "首页";
     });
-    $router->any('/chat/dingtalk', [DingtalkChat::class, 'main']);
+    $router->any('/chat/dingtalk', [\App\Controller\DingtalkChat::class, 'main']);
 };
 
