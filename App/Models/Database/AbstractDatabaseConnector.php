@@ -4,7 +4,7 @@ namespace App\Models\Database;
 
 use App\Models\User;
 
-abstract class DatabaseConnector
+abstract class AbstractDatabaseConnector
 {
     private string $url;
     private string $dbname;

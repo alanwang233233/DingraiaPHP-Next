@@ -9,7 +9,7 @@ use Random\RandomException;
 use ReflectionObject;
 use ReflectionProperty;
 
-class MySQLConnector extends DatabaseConnector
+class MySQLConnector extends AbstractDatabaseConnector
 {
     use Tools;
 

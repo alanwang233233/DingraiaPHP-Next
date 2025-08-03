@@ -59,6 +59,24 @@
       <path value="$PROJECT_DIR$/Vendor/psr/http-message" />
       <path value="$PROJECT_DIR$/Vendor/workerman/http-client" />
       <path value="$PROJECT_DIR$/Vendor/workerman/psr7" />
+      <path value="$PROJECT_DIR$/Vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/Vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/Vendor/lizhichao/one-sm" />
+      <path value="$PROJECT_DIR$/Vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/Vendor/alibabacloud/tea" />
+      <path value="$PROJECT_DIR$/Vendor/alibabacloud/tea-utils" />
+      <path value="$PROJECT_DIR$/Vendor/alibabacloud/credentials" />
+      <path value="$PROJECT_DIR$/Vendor/alibabacloud/openapi-util" />
+      <path value="$PROJECT_DIR$/Vendor/alibabacloud/darabonba-openapi" />
+      <path value="$PROJECT_DIR$/Vendor/alibabacloud/dingtalk" />
+      <path value="$PROJECT_DIR$/Vendor/alibabacloud/tea-xml" />
+      <path value="$PROJECT_DIR$/Vendor/alibabacloud/gateway-spi" />
+      <path value="$PROJECT_DIR$/Vendor/alibabacloud/gateway-dingtalk" />
+      <path value="$PROJECT_DIR$/Vendor/alibabacloud/endpoint-util" />
+      <path value="$PROJECT_DIR$/Vendor/adbario/php-dot-notation" />
+      <path value="$PROJECT_DIR$/Vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/Vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/Vendor/guzzlehttp/promises" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />

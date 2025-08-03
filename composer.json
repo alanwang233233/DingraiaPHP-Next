@@ -6,7 +6,8 @@
     "ext-pdo_mysql": "*",
     "ext-redis": "*",
     "twig/twig": "^3.21",
-    "ext-curl": "*"
+    "ext-curl": "*",
+    "alibabacloud/dingtalk": "^2.1"
   },
   "autoload": {
     "psr-4": {

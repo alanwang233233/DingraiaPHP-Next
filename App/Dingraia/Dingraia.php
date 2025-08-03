@@ -13,8 +13,8 @@ class Dingraia
         $route->resolve();
     }
 
-    public function s()
+    public function stop(): void
     {
-
+        ob_end_flush();
     }
 }

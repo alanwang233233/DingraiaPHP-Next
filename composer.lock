@@ -4,8 +4,1041 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "ec44401a3711a0f1ddf2198d365de789",
+  "content-hash": "d84fa1cd1d95e8742ef7e2282758c6b4",
   "packages": [
+    {
+      "name": "adbario/php-dot-notation",
+      "version": "2.5.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/adbario/php-dot-notation.git",
+        "reference": "081e2cca50c84bfeeea2e3ef9b2c8d206d80ccae"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/adbario/php-dot-notation/zipball/081e2cca50c84bfeeea2e3ef9b2c8d206d80ccae",
+        "reference": "081e2cca50c84bfeeea2e3ef9b2c8d206d80ccae",
+        "shasum": ""
+      },
+      "require": {
+        "ext-json": "*",
+        "php": "^5.5 || ^7.0 || ^8.0"
+      },
+      "require-dev": {
+        "phpunit/phpunit": "^4.8|^5.7|^6.6|^7.5|^8.5|^9.5",
+        "squizlabs/php_codesniffer": "^3.6"
+      },
+      "type": "library",
+      "autoload": {
+        "files": [
+          "src/helpers.php"
+        ],
+        "psr-4": {
+          "Adbar\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "Riku Särkinen",
+          "email": "riku@adbar.io"
+        }
+      ],
+      "description": "PHP dot notation access to arrays",
+      "homepage": "https://github.com/adbario/php-dot-notation",
+      "keywords": [
+        "ArrayAccess",
+        "dotnotation"
+      ],
+      "support": {
+        "issues": "https://github.com/adbario/php-dot-notation/issues",
+        "source": "https://github.com/adbario/php-dot-notation/tree/2.5.0"
+      },
+      "time": "2022-10-14T20:31:46+00:00"
+    },
+    {
+      "name": "alibabacloud/credentials",
+      "version": "1.2.3",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/aliyun/credentials-php.git",
+        "reference": "f6d1986e7b7be8da781d0b99f24c92d9860ba0c1"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/aliyun/credentials-php/zipball/f6d1986e7b7be8da781d0b99f24c92d9860ba0c1",
+        "reference": "f6d1986e7b7be8da781d0b99f24c92d9860ba0c1",
+        "shasum": ""
+      },
+      "require": {
+        "adbario/php-dot-notation": "^2.2",
+        "alibabacloud/tea": "^3.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-libxml": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-simplexml": "*",
+        "ext-xmlwriter": "*",
+        "guzzlehttp/guzzle": "^6.3|^7.0",
+        "php": ">=5.6"
+      },
+      "require-dev": {
+        "composer/composer": "^1.8",
+        "drupal/coder": "^8.3",
+        "ext-dom": "*",
+        "ext-pcre": "*",
+        "ext-sockets": "*",
+        "ext-spl": "*",
+        "mikey179/vfsstream": "^1.6",
+        "monolog/monolog": "^1.24",
+        "phpunit/phpunit": "^5.7|^6.6|^9.3",
+        "psr/cache": "^1.0",
+        "symfony/dotenv": "^3.4",
+        "symfony/var-dumper": "^3.4"
+      },
+      "suggest": {
+        "ext-sockets": "To use client-side monitoring"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "AlibabaCloud\\Credentials\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "Apache-2.0"
+      ],
+      "authors": [
+        {
+          "name": "Alibaba Cloud SDK",
+          "email": "sdk-team@alibabacloud.com",
+          "homepage": "http://www.alibabacloud.com"
+        }
+      ],
+      "description": "Alibaba Cloud Credentials for PHP",
+      "homepage": "https://www.alibabacloud.com/",
+      "keywords": [
+        "alibaba",
+        "alibabacloud",
+        "aliyun",
+        "client",
+        "cloud",
+        "credentials",
+        "library",
+        "sdk",
+        "tool"
+      ],
+      "support": {
+        "issues": "https://github.com/aliyun/credentials-php/issues",
+        "source": "https://github.com/aliyun/credentials-php"
+      },
+      "time": "2025-04-18T09:09:46+00:00"
+    },
+    {
+      "name": "alibabacloud/darabonba-openapi",
+      "version": "0.2.17",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/alibabacloud-sdk-php/darabonba-openapi.git",
+        "reference": "051cd22db3da16ab7d0110feb3fc45dd0f999f92"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/alibabacloud-sdk-php/darabonba-openapi/zipball/051cd22db3da16ab7d0110feb3fc45dd0f999f92",
+        "reference": "051cd22db3da16ab7d0110feb3fc45dd0f999f92",
+        "shasum": ""
+      },
+      "require": {
+        "alibabacloud/credentials": "^1.2.2",
+        "alibabacloud/gateway-spi": "^1",
+        "alibabacloud/openapi-util": "^0.1.10|^0.2.1",
+        "alibabacloud/tea-utils": "^0.2.21",
+        "alibabacloud/tea-xml": "^0.2",
+        "php": ">5.5"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "Darabonba\\OpenApi\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "Apache-2.0"
+      ],
+      "authors": [
+        {
+          "name": "Alibaba Cloud SDK",
+          "email": "sdk-team@alibabacloud.com"
+        }
+      ],
+      "description": "Alibaba Cloud OpenApi Client",
+      "support": {
+        "issues": "https://github.com/alibabacloud-sdk-php/darabonba-openapi/issues",
+        "source": "https://github.com/alibabacloud-sdk-php/darabonba-openapi/tree/0.2.17"
+      },
+      "time": "2025-07-04T09:26:04+00:00"
+    },
+    {
+      "name": "alibabacloud/dingtalk",
+      "version": "2.1.68",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/alibabacloud-sdk-php/dingtalk.git",
+        "reference": "6e552c04de91bc906ff414addc987d2ccf56c09e"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/alibabacloud-sdk-php/dingtalk/zipball/6e552c04de91bc906ff414addc987d2ccf56c09e",
+        "reference": "6e552c04de91bc906ff414addc987d2ccf56c09e",
+        "shasum": ""
+      },
+      "require": {
+        "alibabacloud/darabonba-openapi": "^0.2.15",
+        "alibabacloud/endpoint-util": "^0.1.0",
+        "alibabacloud/gateway-dingtalk": "^1.0.2",
+        "alibabacloud/gateway-spi": "^1",
+        "alibabacloud/openapi-util": "^0.1.10|^0.2.1",
+        "alibabacloud/tea-utils": "^0.2.21",
+        "php": ">5.5"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "AlibabaCloud\\SDK\\Dingtalk\\Vim_1_0\\": "src/im_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vim_2_0\\": "src/im_2_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vats_1_0\\": "src/ats_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcrm_1_0\\": "src/crm_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcrm_2_0\\": "src/crm_2_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vdoc_1_0\\": "src/doc_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vdoc_2_0\\": "src/doc_2_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vedu_1_0\\": "src/edu_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vhrm_1_0\\": "src/hrm_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vokr_1_0\\": "src/okr_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vwms_1_0\\": "src/wms_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Valgo_1_0\\": "src/algo_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vamdp_1_0\\": "src/amdp_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcard_1_0\\": "src/card_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vdiot_1_0\\": "src/diot_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vjobs_1_0\\": "src/jobs_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vlink_1_0\\": "src/link_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vlive_1_0\\": "src/live_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vmail_1_0\\": "src/mail_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vtodo_1_0\\": "src/todo_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vtrip_1_0\\": "src/trip_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vwatt_1_0\\": "src/watt_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vwiki_1_0\\": "src/wiki_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vwiki_2_0\\": "src/wiki_2_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vyida_1_0\\": "src/yida_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vyida_2_0\\": "src/yida_2_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vagoal_1_0\\": "src/agoal_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vapaas_1_0\\": "src/apaas_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vbadge_1_0\\": "src/badge_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vdpaas_1_0\\": "src/dpaas_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vdrive_1_0\\": "src/drive_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vesign_1_0\\": "src/esign_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vesign_2_0\\": "src/esign_2_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vevent_1_0\\": "src/event_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vh3yun_1_0\\": "src/h3yun_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vjzcrm_1_0\\": "src/jzcrm_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vmeter_1_0\\": "src/meter_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vpedia_1_0\\": "src/pedia_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vrobot_1_0\\": "src/robot_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vrooms_1_0\\": "src/rooms_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vtrade_1_0\\": "src/trade_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcarbon_1_0\\": "src/carbon_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcredit_1_0\\": "src/credit_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vdingmi_1_0\\": "src/dingmi_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vimpaas_1_0\\": "src/impaas_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Voauth2_1_0\\": "src/oauth2_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vreport_1_0\\": "src/report_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vsalary_1_0\\": "src/salary_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vsearch_1_0\\": "src/search_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vswform_1_0\\": "src/swform_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Valitrip_1_0\\": "src/alitrip_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vbay_max_1_0\\": "src/bay_max_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcontact_1_0\\": "src/contact_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcontent_1_0\\": "src/content_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vfinance_1_0\\": "src/finance_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vgateway_1_0\\": "src/gateway_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vhrbrain_1_0\\": "src/hrbrain_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vminiapp_1_0\\": "src/miniapp_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vminutes_1_0\\": "src/minutes_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vnotable_1_0\\": "src/notable_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vnotable_2_0\\": "src/notable_2_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vpackage_1_0\\": "src/package_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vproject_1_0\\": "src/project_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vstorage_1_0\\": "src/storage_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vstorage_2_0\\": "src/storage_2_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vvillage_1_0\\": "src/village_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vyun_shu_1_0\\": "src/yun_shu_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vactivity_1_0\\": "src/activity_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vai_paa_s_1_0\\": "src/ai_paa_s_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcalendar_1_0\\": "src/calendar_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcheck_in_1_0\\": "src/check_in_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcontract_1_0\\": "src/contract_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcool_app_1_0\\": "src/cool_app_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcool_ops_1_0\\": "src/cool_ops_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vflashmsg_1_0\\": "src/flashmsg_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vindustry_1_0\\": "src/industry_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vrcs_call_1_0\\": "src/rcs_call_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vresident_1_0\\": "src/resident_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vtodo_e_e_1_0\\": "src/todo_e_e_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vworkflow_1_0\\": "src/workflow_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vassistant_1_0\\": "src/assistant_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vchengfeng_1_0\\": "src/chengfeng_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vconnector_1_0\\": "src/connector_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vconv_file_1_0\\": "src/conv_file_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vdevicemng_1_0\\": "src/devicemng_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vexclusive_1_0\\": "src/exclusive_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vh5package_1_0\\": "src/h5package_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vmicro_app_1_0\\": "src/micro_app_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vworkbench_1_0\\": "src/workbench_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vapp_market_1_0\\": "src/app_market_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vattendance_1_0\\": "src/attendance_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vbizfinance_1_0\\": "src/bizfinance_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vbizfinance_2_0\\": "src/bizfinance_2_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vblackboard_1_0\\": "src/blackboard_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vconference_1_0\\": "src/conference_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vdatacenter_1_0\\": "src/datacenter_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vding_phone_1_0\\": "src/ding_phone_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vtrajectory_1_0\\": "src/trajectory_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vtranscribe_1_0\\": "src/transcribe_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vvip_member_1_0\\": "src/vip_member_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vworkrecord_1_0\\": "src/workrecord_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vorg_culture_1_0\\": "src/org_culture_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vsns_storage_1_0\\": "src/sns_storage_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vteam_sphere_1_0\\": "src/team_sphere_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vflashmeeting_1_0\\": "src/flashmeeting_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vsmart_device_1_0\\": "src/smart_device_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vmanufacturing_1_0\\": "src/manufacturing_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vservice_group_1_0\\": "src/service_group_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vai_interaction_1_0\\": "src/ai_interaction_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Voccupationauth_1_0\\": "src/occupationauth_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vlive_activities_1_0\\": "src/live_activities_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vcustomer_service_1_0\\": "src/customer_service_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vgroup_blackboard_1_0\\": "src/group_blackboard_1_0/",
+          "AlibabaCloud\\SDK\\Dingtalk\\Vproject_integration_1_0\\": "src/project_integration_1_0/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "Apache-2.0"
+      ],
+      "authors": [
+        {
+          "name": "Alibaba Cloud SDK",
+          "email": "sdk-team@alibabacloud.com"
+        }
+      ],
+      "description": "Alibaba Cloud Dingtalk SDK Library for PHP",
+      "support": {
+        "source": "https://github.com/alibabacloud-sdk-php/dingtalk/tree/2.1.68"
+      },
+      "time": "2025-07-31T03:46:00+00:00"
+    },
+    {
+      "name": "alibabacloud/endpoint-util",
+      "version": "0.1.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/alibabacloud-sdk-php/endpoint-util.git",
+        "reference": "f3fe88a25d8df4faa3b0ae14ff202a9cc094e6c5"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/alibabacloud-sdk-php/endpoint-util/zipball/f3fe88a25d8df4faa3b0ae14ff202a9cc094e6c5",
+        "reference": "f3fe88a25d8df4faa3b0ae14ff202a9cc094e6c5",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">5.5"
+      },
+      "require-dev": {
+        "phpunit/phpunit": "^4.8.35|^5.4.3"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "AlibabaCloud\\Endpoint\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "Apache-2.0"
+      ],
+      "authors": [
+        {
+          "name": "Alibaba Cloud SDK",
+          "email": "sdk-team@alibabacloud.com"
+        }
+      ],
+      "description": "Alibaba Cloud Endpoint Library for PHP",
+      "support": {
+        "source": "https://github.com/alibabacloud-sdk-php/endpoint-util/tree/0.1.1"
+      },
+      "time": "2020-06-04T10:57:15+00:00"
+    },
+    {
+      "name": "alibabacloud/gateway-dingtalk",
+      "version": "1.0.2",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/alibabacloud-sdk-php/alibabacloud-gateway-dingtalk.git",
+        "reference": "50f67ea3ea0bad2eb7760aada4a46b2f1b230ed4"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/alibabacloud-sdk-php/alibabacloud-gateway-dingtalk/zipball/50f67ea3ea0bad2eb7760aada4a46b2f1b230ed4",
+        "reference": "50f67ea3ea0bad2eb7760aada4a46b2f1b230ed4",
+        "shasum": ""
+      },
+      "require": {
+        "alibabacloud/gateway-spi": "^1",
+        "alibabacloud/tea-utils": "^0.2.18",
+        "php": ">5.5"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "Darabonba\\GatewayDingTalk\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "Apache-2.0"
+      ],
+      "authors": [
+        {
+          "name": "Alibaba Cloud SDK",
+          "email": "sdk-team@alibabacloud.com"
+        }
+      ],
+      "description": "Alibaba Cloud DingTalk Client",
+      "support": {
+        "source": "https://github.com/alibabacloud-sdk-php/alibabacloud-gateway-dingtalk/tree/1.0.2"
+      },
+      "time": "2023-04-25T09:44:20+00:00"
+    },
+    {
+      "name": "alibabacloud/gateway-spi",
+      "version": "1.0.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/alibabacloud-sdk-php/alibabacloud-gateway-spi.git",
+        "reference": "7440f77750c329d8ab252db1d1d967314ccd1fcb"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/alibabacloud-sdk-php/alibabacloud-gateway-spi/zipball/7440f77750c329d8ab252db1d1d967314ccd1fcb",
+        "reference": "7440f77750c329d8ab252db1d1d967314ccd1fcb",
+        "shasum": ""
+      },
+      "require": {
+        "alibabacloud/credentials": "^1.1",
+        "php": ">5.5"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "Darabonba\\GatewaySpi\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "Apache-2.0"
+      ],
+      "authors": [
+        {
+          "name": "Alibaba Cloud SDK",
+          "email": "sdk-team@alibabacloud.com"
+        }
+      ],
+      "description": "Alibaba Cloud Gateway SPI Client",
+      "support": {
+        "source": "https://github.com/alibabacloud-sdk-php/alibabacloud-gateway-spi/tree/1.0.0"
+      },
+      "time": "2022-07-14T05:31:35+00:00"
+    },
+    {
+      "name": "alibabacloud/openapi-util",
+      "version": "0.2.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/alibabacloud-sdk-php/openapi-util.git",
+        "reference": "f31f7bcd835e08ca24b6b8ba33637eb4eceb093a"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/alibabacloud-sdk-php/openapi-util/zipball/f31f7bcd835e08ca24b6b8ba33637eb4eceb093a",
+        "reference": "f31f7bcd835e08ca24b6b8ba33637eb4eceb093a",
+        "shasum": ""
+      },
+      "require": {
+        "alibabacloud/tea": "^3.1",
+        "alibabacloud/tea-utils": "^0.2",
+        "lizhichao/one-sm": "^1.5",
+        "php": ">5.5"
+      },
+      "require-dev": {
+        "phpunit/phpunit": "*"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "AlibabaCloud\\OpenApiUtil\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "Apache-2.0"
+      ],
+      "authors": [
+        {
+          "name": "Alibaba Cloud SDK",
+          "email": "sdk-team@alibabacloud.com"
+        }
+      ],
+      "description": "Alibaba Cloud OpenApi Util",
+      "support": {
+        "issues": "https://github.com/alibabacloud-sdk-php/openapi-util/issues",
+        "source": "https://github.com/alibabacloud-sdk-php/openapi-util/tree/0.2.1"
+      },
+      "time": "2023-01-10T09:10:10+00:00"
+    },
+    {
+      "name": "alibabacloud/tea",
+      "version": "3.2.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/aliyun/tea-php.git",
+        "reference": "1619cb96c158384f72b873e1f85de8b299c9c367"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/aliyun/tea-php/zipball/1619cb96c158384f72b873e1f85de8b299c9c367",
+        "reference": "1619cb96c158384f72b873e1f85de8b299c9c367",
+        "shasum": ""
+      },
+      "require": {
+        "adbario/php-dot-notation": "^2.4",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-libxml": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-simplexml": "*",
+        "ext-xmlwriter": "*",
+        "guzzlehttp/guzzle": "^6.3|^7.0",
+        "php": ">=5.5"
+      },
+      "require-dev": {
+        "phpunit/phpunit": "*",
+        "symfony/dotenv": "^3.4",
+        "symfony/var-dumper": "^3.4"
+      },
+      "suggest": {
+        "ext-sockets": "To use client-side monitoring"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "AlibabaCloud\\Tea\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "Apache-2.0"
+      ],
+      "authors": [
+        {
+          "name": "Alibaba Cloud SDK",
+          "email": "sdk-team@alibabacloud.com",
+          "homepage": "http://www.alibabacloud.com"
+        }
+      ],
+      "description": "Client of Tea for PHP",
+      "homepage": "https://www.alibabacloud.com/",
+      "keywords": [
+        "alibabacloud",
+        "client",
+        "cloud",
+        "tea"
+      ],
+      "support": {
+        "issues": "https://github.com/aliyun/tea-php/issues",
+        "source": "https://github.com/aliyun/tea-php"
+      },
+      "time": "2023-05-16T06:43:41+00:00"
+    },
+    {
+      "name": "alibabacloud/tea-utils",
+      "version": "0.2.21",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/alibabacloud-sdk-php/tea-utils.git",
+        "reference": "5039e45714c6456186d267f5d81a4b260a652495"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/alibabacloud-sdk-php/tea-utils/zipball/5039e45714c6456186d267f5d81a4b260a652495",
+        "reference": "5039e45714c6456186d267f5d81a4b260a652495",
+        "shasum": ""
+      },
+      "require": {
+        "alibabacloud/tea": "^3.1",
+        "php": ">5.5"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "AlibabaCloud\\Tea\\Utils\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "Apache-2.0"
+      ],
+      "authors": [
+        {
+          "name": "Alibaba Cloud SDK",
+          "email": "sdk-team@alibabacloud.com"
+        }
+      ],
+      "description": "Alibaba Cloud Tea Utils for PHP",
+      "support": {
+        "issues": "https://github.com/aliyun/tea-util/issues",
+        "source": "https://github.com/aliyun/tea-util"
+      },
+      "time": "2024-07-05T06:05:54+00:00"
+    },
+    {
+      "name": "alibabacloud/tea-xml",
+      "version": "0.2.4",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/alibabacloud-sdk-php/tea-xml.git",
+        "reference": "3e0c000bf536224eebbac913c371bef174c0a16a"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/alibabacloud-sdk-php/tea-xml/zipball/3e0c000bf536224eebbac913c371bef174c0a16a",
+        "reference": "3e0c000bf536224eebbac913c371bef174c0a16a",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">5.5"
+      },
+      "require-dev": {
+        "phpunit/phpunit": "*",
+        "symfony/var-dumper": "*"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "AlibabaCloud\\Tea\\XML\\": "src"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "Apache-2.0"
+      ],
+      "authors": [
+        {
+          "name": "Alibaba Cloud SDK",
+          "email": "sdk-team@alibabacloud.com"
+        }
+      ],
+      "description": "Alibaba Cloud Tea XML Library for PHP",
+      "support": {
+        "source": "https://github.com/alibabacloud-sdk-php/tea-xml/tree/0.2.4"
+      },
+      "time": "2022-08-02T04:12:58+00:00"
+    },
+    {
+      "name": "guzzlehttp/guzzle",
+      "version": "7.9.3",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/guzzle/guzzle.git",
+        "reference": "7b2f29fe81dc4da0ca0ea7d42107a0845946ea77"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/guzzle/guzzle/zipball/7b2f29fe81dc4da0ca0ea7d42107a0845946ea77",
+        "reference": "7b2f29fe81dc4da0ca0ea7d42107a0845946ea77",
+        "shasum": ""
+      },
+      "require": {
+        "ext-json": "*",
+        "guzzlehttp/promises": "^1.5.3 || ^2.0.3",
+        "guzzlehttp/psr7": "^2.7.0",
+        "php": "^7.2.5 || ^8.0",
+        "psr/http-client": "^1.0",
+        "symfony/deprecation-contracts": "^2.2 || ^3.0"
+      },
+      "provide": {
+        "psr/http-client-implementation": "1.0"
+      },
+      "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.8.2",
+        "ext-curl": "*",
+        "guzzle/client-integration-tests": "3.0.2",
+        "php-http/message-factory": "^1.1",
+        "phpunit/phpunit": "^8.5.39 || ^9.6.20",
+        "psr/log": "^1.1 || ^2.0 || ^3.0"
+      },
+      "suggest": {
+        "ext-curl": "Required for CURL handler support",
+        "ext-intl": "Required for Internationalized Domain Name (IDN) support",
+        "psr/log": "Required for using the Log middleware"
+      },
+      "type": "library",
+      "extra": {
+        "bamarni-bin": {
+          "bin-links": true,
+          "forward-command": false
+        }
+      },
+      "autoload": {
+        "files": [
+          "src/functions_include.php"
+        ],
+        "psr-4": {
+          "GuzzleHttp\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "Graham Campbell",
+          "email": "hello@gjcampbell.co.uk",
+          "homepage": "https://github.com/GrahamCampbell"
+        },
+        {
+          "name": "Michael Dowling",
+          "email": "mtdowling@gmail.com",
+          "homepage": "https://github.com/mtdowling"
+        },
+        {
+          "name": "Jeremy Lindblom",
+          "email": "jeremeamia@gmail.com",
+          "homepage": "https://github.com/jeremeamia"
+        },
+        {
+          "name": "George Mponos",
+          "email": "gmponos@gmail.com",
+          "homepage": "https://github.com/gmponos"
+        },
+        {
+          "name": "Tobias Nyholm",
+          "email": "tobias.nyholm@gmail.com",
+          "homepage": "https://github.com/Nyholm"
+        },
+        {
+          "name": "Márk Sági-Kazár",
+          "email": "mark.sagikazar@gmail.com",
+          "homepage": "https://github.com/sagikazarmark"
+        },
+        {
+          "name": "Tobias Schultze",
+          "email": "webmaster@tubo-world.de",
+          "homepage": "https://github.com/Tobion"
+        }
+      ],
+      "description": "Guzzle is a PHP HTTP client library",
+      "keywords": [
+        "client",
+        "curl",
+        "framework",
+        "http",
+        "http client",
+        "psr-18",
+        "psr-7",
+        "rest",
+        "web service"
+      ],
+      "support": {
+        "issues": "https://github.com/guzzle/guzzle/issues",
+        "source": "https://github.com/guzzle/guzzle/tree/7.9.3"
+      },
+      "funding": [
+        {
+          "url": "https://github.com/GrahamCampbell",
+          "type": "github"
+        },
+        {
+          "url": "https://github.com/Nyholm",
+          "type": "github"
+        },
+        {
+          "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/guzzle",
+          "type": "tidelift"
+        }
+      ],
+      "time": "2025-03-27T13:37:11+00:00"
+    },
+    {
+      "name": "guzzlehttp/promises",
+      "version": "2.2.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/guzzle/promises.git",
+        "reference": "7c69f28996b0a6920945dd20b3857e499d9ca96c"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/guzzle/promises/zipball/7c69f28996b0a6920945dd20b3857e499d9ca96c",
+        "reference": "7c69f28996b0a6920945dd20b3857e499d9ca96c",
+        "shasum": ""
+      },
+      "require": {
+        "php": "^7.2.5 || ^8.0"
+      },
+      "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.8.2",
+        "phpunit/phpunit": "^8.5.39 || ^9.6.20"
+      },
+      "type": "library",
+      "extra": {
+        "bamarni-bin": {
+          "bin-links": true,
+          "forward-command": false
+        }
+      },
+      "autoload": {
+        "psr-4": {
+          "GuzzleHttp\\Promise\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "Graham Campbell",
+          "email": "hello@gjcampbell.co.uk",
+          "homepage": "https://github.com/GrahamCampbell"
+        },
+        {
+          "name": "Michael Dowling",
+          "email": "mtdowling@gmail.com",
+          "homepage": "https://github.com/mtdowling"
+        },
+        {
+          "name": "Tobias Nyholm",
+          "email": "tobias.nyholm@gmail.com",
+          "homepage": "https://github.com/Nyholm"
+        },
+        {
+          "name": "Tobias Schultze",
+          "email": "webmaster@tubo-world.de",
+          "homepage": "https://github.com/Tobion"
+        }
+      ],
+      "description": "Guzzle promises library",
+      "keywords": [
+        "promise"
+      ],
+      "support": {
+        "issues": "https://github.com/guzzle/promises/issues",
+        "source": "https://github.com/guzzle/promises/tree/2.2.0"
+      },
+      "funding": [
+        {
+          "url": "https://github.com/GrahamCampbell",
+          "type": "github"
+        },
+        {
+          "url": "https://github.com/Nyholm",
+          "type": "github"
+        },
+        {
+          "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/promises",
+          "type": "tidelift"
+        }
+      ],
+      "time": "2025-03-27T13:27:01+00:00"
+    },
+    {
+      "name": "guzzlehttp/psr7",
+      "version": "2.7.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/guzzle/psr7.git",
+        "reference": "c2270caaabe631b3b44c85f99e5a04bbb8060d16"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/guzzle/psr7/zipball/c2270caaabe631b3b44c85f99e5a04bbb8060d16",
+        "reference": "c2270caaabe631b3b44c85f99e5a04bbb8060d16",
+        "shasum": ""
+      },
+      "require": {
+        "php": "^7.2.5 || ^8.0",
+        "psr/http-factory": "^1.0",
+        "psr/http-message": "^1.1 || ^2.0",
+        "ralouphie/getallheaders": "^3.0"
+      },
+      "provide": {
+        "psr/http-factory-implementation": "1.0",
+        "psr/http-message-implementation": "1.0"
+      },
+      "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.8.2",
+        "http-interop/http-factory-tests": "0.9.0",
+        "phpunit/phpunit": "^8.5.39 || ^9.6.20"
+      },
+      "suggest": {
+        "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
+      },
+      "type": "library",
+      "extra": {
+        "bamarni-bin": {
+          "bin-links": true,
+          "forward-command": false
+        }
+      },
+      "autoload": {
+        "psr-4": {
+          "GuzzleHttp\\Psr7\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "Graham Campbell",
+          "email": "hello@gjcampbell.co.uk",
+          "homepage": "https://github.com/GrahamCampbell"
+        },
+        {
+          "name": "Michael Dowling",
+          "email": "mtdowling@gmail.com",
+          "homepage": "https://github.com/mtdowling"
+        },
+        {
+          "name": "George Mponos",
+          "email": "gmponos@gmail.com",
+          "homepage": "https://github.com/gmponos"
+        },
+        {
+          "name": "Tobias Nyholm",
+          "email": "tobias.nyholm@gmail.com",
+          "homepage": "https://github.com/Nyholm"
+        },
+        {
+          "name": "Márk Sági-Kazár",
+          "email": "mark.sagikazar@gmail.com",
+          "homepage": "https://github.com/sagikazarmark"
+        },
+        {
+          "name": "Tobias Schultze",
+          "email": "webmaster@tubo-world.de",
+          "homepage": "https://github.com/Tobion"
+        },
+        {
+          "name": "Márk Sági-Kazár",
+          "email": "mark.sagikazar@gmail.com",
+          "homepage": "https://sagikazarmark.hu"
+        }
+      ],
+      "description": "PSR-7 message implementation that also provides common utility methods",
+      "keywords": [
+        "http",
+        "message",
+        "psr-7",
+        "request",
+        "response",
+        "stream",
+        "uri",
+        "url"
+      ],
+      "support": {
+        "issues": "https://github.com/guzzle/psr7/issues",
+        "source": "https://github.com/guzzle/psr7/tree/2.7.1"
+      },
+      "funding": [
+        {
+          "url": "https://github.com/GrahamCampbell",
+          "type": "github"
+        },
+        {
+          "url": "https://github.com/Nyholm",
+          "type": "github"
+        },
+        {
+          "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/psr7",
+          "type": "tidelift"
+        }
+      ],
+      "time": "2025-03-27T12:30:47+00:00"
+    },
+    {
+      "name": "lizhichao/one-sm",
+      "version": "1.10",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/lizhichao/sm.git",
+        "reference": "687a012a44a5bfd4d9143a0234e1060543be455a"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/lizhichao/sm/zipball/687a012a44a5bfd4d9143a0234e1060543be455a",
+        "reference": "687a012a44a5bfd4d9143a0234e1060543be455a",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=5.6"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "OneSm\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "Apache-2.0"
+      ],
+      "authors": [
+        {
+          "name": "tanszhe",
+          "email": "1018595261@qq.com"
+        }
+      ],
+      "description": "国密sm3",
+      "keywords": [
+        "php",
+        "sm3"
+      ],
+      "support": {
+        "issues": "https://github.com/lizhichao/sm/issues",
+        "source": "https://github.com/lizhichao/sm/tree/1.10"
+      },
+      "funding": [
+        {
+          "url": "https://www.vicsdf.com/img/w.jpg",
+          "type": "custom"
+        },
+        {
+          "url": "https://www.vicsdf.com/img/z.jpg",
+          "type": "custom"
+        }
+      ],
+      "time": "2021-05-26T06:19:22+00:00"
+    },
     {
       "name": "monolog/monolog",
       "version": "3.9.0",
@@ -110,6 +1143,113 @@
       "time": "2025-03-24T10:02:05+00:00"
     },
     {
+      "name": "psr/http-client",
+      "version": "1.0.3",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/php-fig/http-client.git",
+        "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/php-fig/http-client/zipball/bb5906edc1c324c9a05aa0873d40117941e5fa90",
+        "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90",
+        "shasum": ""
+      },
+      "require": {
+        "php": "^7.0 || ^8.0",
+        "psr/http-message": "^1.0 || ^2.0"
+      },
+      "type": "library",
+      "extra": {
+        "branch-alias": {
+          "dev-master": "1.0.x-dev"
+        }
+      },
+      "autoload": {
+        "psr-4": {
+          "Psr\\Http\\Client\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "PHP-FIG",
+          "homepage": "https://www.php-fig.org/"
+        }
+      ],
+      "description": "Common interface for HTTP clients",
+      "homepage": "https://github.com/php-fig/http-client",
+      "keywords": [
+        "http",
+        "http-client",
+        "psr",
+        "psr-18"
+      ],
+      "support": {
+        "source": "https://github.com/php-fig/http-client"
+      },
+      "time": "2023-09-23T14:17:50+00:00"
+    },
+    {
+      "name": "psr/http-factory",
+      "version": "1.1.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/php-fig/http-factory.git",
+        "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/php-fig/http-factory/zipball/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+        "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=7.1",
+        "psr/http-message": "^1.0 || ^2.0"
+      },
+      "type": "library",
+      "extra": {
+        "branch-alias": {
+          "dev-master": "1.0.x-dev"
+        }
+      },
+      "autoload": {
+        "psr-4": {
+          "Psr\\Http\\Message\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "PHP-FIG",
+          "homepage": "https://www.php-fig.org/"
+        }
+      ],
+      "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
+      "keywords": [
+        "factory",
+        "http",
+        "message",
+        "psr",
+        "psr-17",
+        "psr-7",
+        "request",
+        "response"
+      ],
+      "support": {
+        "source": "https://github.com/php-fig/http-factory"
+      },
+      "time": "2024-04-15T12:06:14+00:00"
+    },
+    {
       "name": "psr/http-message",
       "version": "2.0",
       "source": {
@@ -211,6 +1351,50 @@
         "source": "https://github.com/php-fig/log/tree/3.0.2"
       },
       "time": "2024-09-11T13:17:53+00:00"
+    },
+    {
+      "name": "ralouphie/getallheaders",
+      "version": "3.0.3",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/ralouphie/getallheaders.git",
+        "reference": "120b605dfeb996808c31b6477290a714d356e822"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/120b605dfeb996808c31b6477290a714d356e822",
+        "reference": "120b605dfeb996808c31b6477290a714d356e822",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=5.6"
+      },
+      "require-dev": {
+        "php-coveralls/php-coveralls": "^2.1",
+        "phpunit/phpunit": "^5 || ^6.5"
+      },
+      "type": "library",
+      "autoload": {
+        "files": [
+          "src/getallheaders.php"
+        ]
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "Ralph Khattar",
+          "email": "ralph.khattar@gmail.com"
+        }
+      ],
+      "description": "A polyfill for getallheaders.",
+      "support": {
+        "issues": "https://github.com/ralouphie/getallheaders/issues",
+        "source": "https://github.com/ralouphie/getallheaders/tree/develop"
+      },
+      "time": "2019-03-08T08:55:37+00:00"
     },
     {
       "name": "symfony/deprecation-contracts",
@@ -517,223 +1701,6 @@
         }
       ],
       "time": "2025-05-03T07:21:55+00:00"
-    },
-    {
-      "name": "workerman/coroutine",
-      "version": "v1.1.3",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/workerman-php/coroutine.git",
-        "reference": "df8fc428967d512a74a8a7d80355c1d40228c9fa"
-      },
-      "dist": {
-        "type": "zip",
-        "url": "https://api.github.com/repos/workerman-php/coroutine/zipball/df8fc428967d512a74a8a7d80355c1d40228c9fa",
-        "reference": "df8fc428967d512a74a8a7d80355c1d40228c9fa",
-        "shasum": ""
-      },
-      "require": {
-        "php": ">=8.1"
-      },
-      "require-dev": {
-        "phpunit/phpunit": "^11.0",
-        "psr/log": "*"
-      },
-      "type": "library",
-      "autoload": {
-        "psr-4": {
-          "Workerman\\": "src",
-          "Workerman\\Coroutine\\": "src"
-        }
-      },
-      "notification-url": "https://packagist.org/downloads/",
-      "license": [
-        "MIT"
-      ],
-      "description": "Workerman coroutine",
-      "support": {
-        "issues": "https://github.com/workerman-php/coroutine/issues",
-        "source": "https://github.com/workerman-php/coroutine/tree/v1.1.3"
-      },
-      "time": "2025-02-17T03:34:21+00:00"
-    },
-    {
-      "name": "workerman/http-client",
-      "version": "v3.0.4",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/workerman-php/http-client.git",
-        "reference": "76d30879f7a70f99a0c5434e0ca5055831cc12e1"
-      },
-      "dist": {
-        "type": "zip",
-        "url": "https://api.github.com/repos/workerman-php/http-client/zipball/76d30879f7a70f99a0c5434e0ca5055831cc12e1",
-        "reference": "76d30879f7a70f99a0c5434e0ca5055831cc12e1",
-        "shasum": ""
-      },
-      "require": {
-        "workerman/psr7": ">=1.4.3",
-        "workerman/workerman": "^5.1 || dev-master"
-      },
-      "require-dev": {
-        "phpunit/phpunit": "^11.0",
-        "revolt/event-loop": "^1.0"
-      },
-      "type": "library",
-      "autoload": {
-        "psr-4": {
-          "Workerman\\Http\\": "./src"
-        }
-      },
-      "notification-url": "https://packagist.org/downloads/",
-      "license": [
-        "MIT"
-      ],
-      "homepage": "https://www.workerman.net",
-      "support": {
-        "issues": "https://github.com/workerman-php/http-client/issues",
-        "source": "https://github.com/workerman-php/http-client/tree/v3.0.4"
-      },
-      "time": "2025-06-25T11:32:13+00:00"
-    },
-    {
-      "name": "workerman/psr7",
-      "version": "v2.0.2",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/walkor/psr7.git",
-        "reference": "5f5b65e2462cd408f738cc967a80d8c15f9b57f3"
-      },
-      "dist": {
-        "type": "zip",
-        "url": "https://api.github.com/repos/walkor/psr7/zipball/5f5b65e2462cd408f738cc967a80d8c15f9b57f3",
-        "reference": "5f5b65e2462cd408f738cc967a80d8c15f9b57f3",
-        "shasum": ""
-      },
-      "require": {
-        "php": ">=7.2.0",
-        "psr/http-message": "~2.0"
-      },
-      "provide": {
-        "psr/http-message-implementation": "1.0"
-      },
-      "require-dev": {
-        "phpunit/phpunit": "~4.0"
-      },
-      "type": "library",
-      "autoload": {
-        "files": [
-          "src/functions_include.php"
-        ],
-        "psr-4": {
-          "Workerman\\Psr7\\": "src/"
-        }
-      },
-      "notification-url": "https://packagist.org/downloads/",
-      "license": [
-        "MIT"
-      ],
-      "authors": [
-        {
-          "name": "Michael Dowling",
-          "email": "mtdowling@gmail.com",
-          "homepage": "https://github.com/mtdowling"
-        },
-        {
-          "name": "Tobias Schultze",
-          "homepage": "https://github.com/Tobion"
-        }
-      ],
-      "description": "PSR-7 message implementation that also provides common utility methods",
-      "keywords": [
-        "http",
-        "message",
-        "request",
-        "response",
-        "stream",
-        "uri",
-        "url"
-      ],
-      "support": {
-        "source": "https://github.com/walkor/psr7/tree/v2.0.2"
-      },
-      "time": "2025-03-06T12:00:37+00:00"
-    },
-    {
-      "name": "workerman/workerman",
-      "version": "v5.1.3",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/walkor/workerman.git",
-        "reference": "371f3a5decb28f1bd3464ae26d47ea1a4cf0a3c5"
-      },
-      "dist": {
-        "type": "zip",
-        "url": "https://api.github.com/repos/walkor/workerman/zipball/371f3a5decb28f1bd3464ae26d47ea1a4cf0a3c5",
-        "reference": "371f3a5decb28f1bd3464ae26d47ea1a4cf0a3c5",
-        "shasum": ""
-      },
-      "require": {
-        "ext-json": "*",
-        "php": ">=8.1",
-        "workerman/coroutine": "^1.1 || dev-main"
-      },
-      "conflict": {
-        "ext-swow": "<v1.0.0"
-      },
-      "require-dev": {
-        "guzzlehttp/guzzle": "^7.0",
-        "mockery/mockery": "^1.6",
-        "pestphp/pest": "2.x-dev",
-        "phpstan/phpstan": "1.11.x-dev"
-      },
-      "suggest": {
-        "ext-event": "For better performance. "
-      },
-      "type": "library",
-      "autoload": {
-        "psr-4": {
-          "Workerman\\": "src"
-        }
-      },
-      "notification-url": "https://packagist.org/downloads/",
-      "license": [
-        "MIT"
-      ],
-      "authors": [
-        {
-          "name": "walkor",
-          "email": "walkor@workerman.net",
-          "homepage": "https://www.workerman.net",
-          "role": "Developer"
-        }
-      ],
-      "description": "An asynchronous event driven PHP framework for easily building fast, scalable network applications.",
-      "homepage": "https://www.workerman.net",
-      "keywords": [
-        "asynchronous",
-        "event-loop",
-        "framework",
-        "http"
-      ],
-      "support": {
-        "email": "walkor@workerman.net",
-        "forum": "https://www.workerman.net/questions",
-        "issues": "https://github.com/walkor/workerman/issues",
-        "source": "https://github.com/walkor/workerman",
-        "wiki": "https://www.workerman.net/doc/workerman/"
-      },
-      "funding": [
-        {
-          "url": "https://opencollective.com/workerman",
-          "type": "open_collective"
-        },
-        {
-          "url": "https://www.patreon.com/walkor",
-          "type": "patreon"
-        }
-      ],
-      "time": "2025-06-12T13:34:04+00:00"
     }
   ],
   "packages-dev": [],
@@ -746,7 +1713,8 @@
     "php": ">=8.4",
     "ext-pdo": "*",
     "ext-pdo_mysql": "*",
-    "ext-redis": "*"
+    "ext-redis": "*",
+    "ext-curl": "*"
   },
   "platform-dev": {},
   "plugin-api-version": "2.6.0"

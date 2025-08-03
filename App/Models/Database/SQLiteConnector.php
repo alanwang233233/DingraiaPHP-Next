@@ -9,7 +9,7 @@ use Random\RandomException;
 use ReflectionObject;
 use ReflectionProperty;
 
-class SQLiteConnector extends DatabaseConnector
+class SQLiteConnector extends AbstractDatabaseConnector
 {
     use Tools;
 

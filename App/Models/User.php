@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Database\DatabaseConnector;
 class User
 {
     public int $uid;
@@ -17,5 +17,9 @@ class User
         $this->username = $username;
         $this->isAdmin = $isAdmin;
         $this->customData = $customData;
+    }
+    public function updateToDatabase()
+    {
+
     }
 }
