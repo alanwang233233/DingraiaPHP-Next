@@ -185,26 +185,18 @@ class Route
      * @param array $middleware 中间件数组
      * @return mixed
      */
-    private function runMiddlewarePipeline(array $middleware): Closure
+    private function runMiddlewarePipeline(array $middleware): mixed
     {
-        // 创建一个闭包作为管道的最终处理函数（执行路由动作）
         $next = function () {
             return $this->executeAction($this->currentAction, $this->currentParams);
         };
-
-        // 反转中间件数组，从最后一个开始构建管道
         $middleware = array_reverse($middleware);
-
-        // 构建中间件管道
         foreach ($middleware as $middlewareClass) {
             $next = function () use ($middlewareClass, $next) {
-                // 实例化中间件并调用handle方法
                 $instance = new $middlewareClass();
                 return $instance->handle($next);
             };
         }
-
-        // 执行管道
         return $next();
     }
 

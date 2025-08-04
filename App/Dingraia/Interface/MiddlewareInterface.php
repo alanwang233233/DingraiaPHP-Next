@@ -4,5 +4,5 @@ namespace App\Dingraia\Interface;
 
 interface MiddlewareInterface
 {
-    public function handle();
+    public function handle($next);
 }
