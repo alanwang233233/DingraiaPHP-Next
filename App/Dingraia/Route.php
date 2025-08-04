@@ -232,7 +232,7 @@ class Route
      * @param array &$params 引用传递，用于存储提取的路径参数
      * @return bool 如果匹配成功返回true，否则返回false
      */
-    private function matchRoute(string $route, string $path, array &$params): mixed
+    private function matchRoute(string $route, string $path, array &$params): bool
     {
         $params = [];
         // 处理静态路由
