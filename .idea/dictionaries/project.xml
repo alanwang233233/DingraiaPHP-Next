@@ -6,6 +6,7 @@
       <w>dingtalk</w>
       <w>msgtype</w>
       <w>strtolower</w>
+      <w>strtoupper</w>
       <w>ucwords</w>
     </words>
   </dictionary>

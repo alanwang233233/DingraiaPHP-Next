@@ -1,54 +1,49 @@
 <?php
 
 namespace App\Dingraia;
+use Closure;
+
 /**
- * 路由管理器，处理HTTP请求并将其分发到对应的控制器方法
+ * 路由管理器，处理HTTP请求并将其分发到对应的控制器方法，支持中间件
  */
 class Route
 {
     /**
      * 存储注册的路由信息
-     * 格式: [路径 => [请求方法 => ['controller' => 处理动作,'middleware' => 中间件]]]
+     * 格式: [路径 => [请求方法 => ['controller' => 处理动作, 'middleware' => 中间件数组]]
      * @var array
      */
     public array $routes = [];
-    /**
-     * 存储默认中间件
-     * 格式：[中间件1,中间件2......]
-     * @var array
-     */
-    public array $defaultMiddleware = [];
-    /**
-     * 设置默认中间件
-     * @param string|callable ...$middlewares 中间件
-     * @return $this 返回当前Route实例，支持链式调用
-     */
-    public function setDefaultMiddlewares(string|callable...$middlewares): static
-    {
-        $this->defaultMiddleware = $middlewares;
-        return $this;
-    }
 
     /**
-     * 添加默认中间件
-     * @param string|callable ...$middlewares 中间件
-     * @return $this 返回当前Route实例，支持链式调用
+     * 全局中间件，将应用于所有路由
+     * @var array
      */
-    public function addDefaultMiddleware(string|callable...$middlewares): static
-    {
-        $this->defaultMiddleware = array_merge($this->defaultMiddleware, $middlewares);
-        return $this;
-    }
+    private array $globalMiddleware = [];
+
+    /**
+     * 当前正在处理的路由参数
+     * @var array
+     */
+    private array $currentParams = [];
+
+    /**
+     * 当前匹配的路由动作
+     * @var callable|array|null
+     */
+    private $currentAction = null;
+
     /**
      * 注册GET请求的路由
      *
      * @param string|array $path 路由路径
      * @param callable|array $action 路由匹配时执行的动作
+     * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function get(string|array $path, callable|array $action): static
+    public function get(string|array $path, callable|array $action, array $middleware = []): static
     {
-        return $this->map(['GET'], $path, $action);
+        return $this->map(['GET'], $path, $action, $middleware);
     }
 
     /**
@@ -57,9 +52,10 @@ class Route
      * @param string|array $methods 支持的HTTP请求方法数组，如['GET', 'POST']
      * @param string|array $paths 路由路径
      * @param callable|array $action 路由匹配时执行的动作，可以是回调函数或控制器方法数组
+     * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function map(string|array $methods, string|array $paths, callable|array $action, callable|string ...$middlewares): static
+    public function map(string|array $methods, string|array $paths, callable|array $action, array $middleware = []): static
     {
         $methods = array_map('strtoupper', is_string($methods) ? [$methods] : $methods);
         $paths = is_string($paths) ? [$paths] : $paths;
@@ -69,8 +65,10 @@ class Route
                 $path = $path . '/';
             }
             foreach ($methods as $method) {
-                $this->routes[$path][$method]['controller'] = $action;
-                $this->routes[$path][$method]['middleware'] = array_merge($this->defaultMiddleware, $middlewares);
+                $this->routes[$path][$method] = [
+                    'action' => $action,
+                    'middleware' => $middleware
+                ];
             }
         }
 
@@ -82,11 +80,12 @@ class Route
      *
      * @param string|array $path 路由路径
      * @param callable|array $action 路由匹配时执行的动作
+     * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function post(string|array $path, callable|array $action): static
+    public function post(string|array $path, callable|array $action, array $middleware = []): static
     {
-        return $this->map(['POST'], $path, $action);
+        return $this->map(['POST'], $path, $action, $middleware);
     }
 
     /**
@@ -94,11 +93,12 @@ class Route
      *
      * @param string $path 路由路径
      * @param callable|array $action 路由匹配时执行的动作
+     * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function put(string $path, callable|array $action): static
+    public function put(string $path, callable|array $action, array $middleware = []): static
     {
-        return $this->map(['PUT'], $path, $action);
+        return $this->map(['PUT'], $path, $action, $middleware);
     }
 
     /**
@@ -106,11 +106,12 @@ class Route
      *
      * @param string $path 路由路径
      * @param callable|array $action 路由匹配时执行的动作
+     * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function delete(string $path, callable|array $action): static
+    public function delete(string $path, callable|array $action, array $middleware = []): static
     {
-        return $this->map(['DELETE'], $path, $action);
+        return $this->map(['DELETE'], $path, $action, $middleware);
     }
 
     /**
@@ -118,15 +119,32 @@ class Route
      *
      * @param string $path 路由路径
      * @param callable|array $action 路由匹配时执行的动作
+     * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function any(string $path, callable|array $action): static
+    public function any(string $path, callable|array $action, array $middleware = []): static
     {
-        return $this->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], $path, $action);
+        return $this->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], $path, $action, $middleware);
     }
 
     /**
-     * 解析当前HTTP请求并执行匹配的路由动作
+     * 添加全局中间件，将应用于所有路由
+     *
+     * @param string|array $middleware 中间件类名或数组
+     * @return $this
+     */
+    public function middleware(string|array $middleware): static
+    {
+        $this->globalMiddleware = array_merge(
+            $this->globalMiddleware,
+            is_array($middleware) ? $middleware : [$middleware]
+        );
+
+        return $this;
+    }
+
+    /**
+     * 解析当前HTTP请求并执行匹配的路由动作，包括中间件处理
      *
      * @return mixed 路由处理结果
      */
@@ -145,13 +163,49 @@ class Route
             $params = [];
             if ($this->matchRoute($routePath, $path, $params)) {
                 if (isset($methods[$requestMethod])) {
-                    $this->executeMiddleware($methods[$requestMethod]['middleware']);
-                    return $this->executeAction($methods[$requestMethod], $params);
+                    $this->currentParams = $params;
+                    $this->currentAction = $methods[$requestMethod]['action'];
+                    $middleware = array_merge(
+                        $this->globalMiddleware,
+                        $methods[$requestMethod]['middleware']
+                    );
+                    return $this->runMiddlewarePipeline($middleware);
                 }
             }
         }
+        $this->currentAction = ['ErrorController', 'notFound'];
+        $this->currentParams = [];
 
-        return $this->executeAction(['ErrorController', 'notFound'], []);
+        return $this->runMiddlewarePipeline($this->globalMiddleware);
+    }
+
+    /**
+     * 运行中间件管道
+     *
+     * @param array $middleware 中间件数组
+     * @return mixed
+     */
+    private function runMiddlewarePipeline(array $middleware): Closure
+    {
+        // 创建一个闭包作为管道的最终处理函数（执行路由动作）
+        $next = function () {
+            return $this->executeAction($this->currentAction, $this->currentParams);
+        };
+
+        // 反转中间件数组，从最后一个开始构建管道
+        $middleware = array_reverse($middleware);
+
+        // 构建中间件管道
+        foreach ($middleware as $middlewareClass) {
+            $next = function () use ($middlewareClass, $next) {
+                // 实例化中间件并调用handle方法
+                $instance = new $middlewareClass();
+                return $instance->handle($next);
+            };
+        }
+
+        // 执行管道
+        return $next();
     }
 
     /**
@@ -209,22 +263,6 @@ class Route
         return '#^' . $route . '$#';
     }
 
-    /**
-     * 执行中间件
-     * @param array $middlewares
-     * @return null
-     */
-    private function executeMiddleware(array $middlewares): null
-    {
-        foreach ($middlewares as $middleware) {
-            if (is_callable($middleware)) {
-                $middleware();
-            } elseif (is_string($middleware)) {
-                call_user_func_array([$middleware,'handle'],[]);
-            }
-        }
-        return null;
-    }
 
     /**
      * 执行路由匹配后的处理动作
@@ -238,13 +276,11 @@ class Route
         if (is_array($action)) {
             $controllerName = $action[0];
             $methodName = $action[1];
-
             $controller = new $controllerName();
             return call_user_func_array([$controller, $methodName], $params);
         } elseif (is_callable($action)) {
             return call_user_func_array($action, $params);
         }
-
         return null;
     }
 }
