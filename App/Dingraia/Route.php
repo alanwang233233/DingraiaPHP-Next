@@ -8,11 +8,37 @@ class Route
 {
     /**
      * 存储注册的路由信息
-     * 格式: [路径 => [请求方法 => 处理动作]]
+     * 格式: [路径 => [请求方法 => ['controller' => 处理动作,'middleware' => 中间件]]]
      * @var array
      */
     public array $routes = [];
+    /**
+     * 存储默认中间件
+     * 格式：[中间件1,中间件2......]
+     * @var array
+     */
+    public array $defaultMiddleware = [];
+    /**
+     * 设置默认中间件
+     * @param string|callable ...$middlewares 中间件
+     * @return $this 返回当前Route实例，支持链式调用
+     */
+    public function setDefaultMiddlewares(string|callable...$middlewares): static
+    {
+        $this->defaultMiddleware = $middlewares;
+        return $this;
+    }
 
+    /**
+     * 添加默认中间件
+     * @param string|callable ...$middlewares 中间件
+     * @return $this 返回当前Route实例，支持链式调用
+     */
+    public function addDefaultMiddleware(string|callable...$middlewares): static
+    {
+        $this->defaultMiddleware = array_merge($this->defaultMiddleware, $middlewares);
+        return $this;
+    }
     /**
      * 注册GET请求的路由
      *
@@ -33,14 +59,18 @@ class Route
      * @param callable|array $action 路由匹配时执行的动作，可以是回调函数或控制器方法数组
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function map(string|array $methods, string|array $paths, callable|array $action): static
+    public function map(string|array $methods, string|array $paths, callable|array $action, callable|string ...$middlewares): static
     {
-        $methods = is_string($methods) ? [$methods] : $methods;
+        $methods = array_map('strtoupper', is_string($methods) ? [$methods] : $methods);
         $paths = is_string($paths) ? [$paths] : $paths;
 
         foreach ($paths as $path) {
+            if (mb_substr($path, -1, 1, 'UTF-8') != '/') {
+                $path = $path . '/';
+            }
             foreach ($methods as $method) {
-                $this->routes[$path][$method] = $action;
+                $this->routes[$path][$method]['controller'] = $action;
+                $this->routes[$path][$method]['middleware'] = array_merge($this->defaultMiddleware, $middlewares);
             }
         }
 
@@ -104,6 +134,9 @@ class Route
     {
         $requestMethod = $this->getRequestMethod();
         $requestUri = $_SERVER['REQUEST_URI'];
+        if (mb_substr($requestUri, -1, 1, 'UTF-8') != '/') {
+            $requestUri = $requestUri . '/';
+        }
         $path = strtok($requestUri, '?');
         $path = preg_replace('#^/index\.php#', '', $path);
         $path = $path ?: '/';
@@ -112,6 +145,7 @@ class Route
             $params = [];
             if ($this->matchRoute($routePath, $path, $params)) {
                 if (isset($methods[$requestMethod])) {
+                    $this->executeMiddleware($methods[$requestMethod]['middleware']);
                     return $this->executeAction($methods[$requestMethod], $params);
                 }
             }
@@ -173,6 +207,23 @@ class Route
     {
         $route = preg_replace('/<([^>]+)>/', '(?<$1>[^/]+)', $route);
         return '#^' . $route . '$#';
+    }
+
+    /**
+     * 执行中间件
+     * @param array $middlewares
+     * @return null
+     */
+    private function executeMiddleware(array $middlewares): null
+    {
+        foreach ($middlewares as $middleware) {
+            if (is_callable($middleware)) {
+                $middleware();
+            } elseif (is_string($middleware)) {
+                call_user_func_array([$middleware,'handle'],[]);
+            }
+        }
+        return null;
     }
 
     /**
