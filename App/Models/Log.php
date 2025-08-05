@@ -15,12 +15,12 @@ class Log
     public function __construct()
     {
         $logger = new Logger('Logger');
-        $logger->pushHandler(new StreamHandler('../../Logs/System.log', Level::Debug));
+        $logger->pushHandler(new StreamHandler(APP_PATH.'/Logs/System.log', Level::Debug));
         $logger->pushHandler(new FirePHPHandler());
         // $logger->info('Request Logger Ready!');
         $this->Logger = $logger;
         $RequestLogger = new Logger('RequestLogger');
-        $RequestLogger->pushHandler(new StreamHandler('../../Logs/Request.log', Level::Debug));
+        $RequestLogger->pushHandler(new StreamHandler(APP_PATH.'/Logs/Request.log', Level::Debug));
         $RequestLogger->pushHandler(new FirePHPHandler());
         // $RequestLogger->info('Request Logger Ready!');
         $this->RequestLogger = $RequestLogger;
@@ -28,10 +28,10 @@ class Log
 
     public function OnRequest(): void
     {
-        $this->RequestLogger->info("OnRequest:" /*. $this->RequestInfo()*/);
+        $this->RequestLogger->info("OnRequest:".$this->RequestInfo());
     }
 
-    /*private function RequestInfo(): string
+    private function RequestInfo(): string
     {
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
         $host = $_SERVER['HTTP_HOST'];
@@ -61,7 +61,7 @@ class Log
         ];
         header('Content-Type: application/json');
         return json_encode($requestInfo);
-    }*/
+    }
 
     public function New(string $msg, string $level): void
     {
