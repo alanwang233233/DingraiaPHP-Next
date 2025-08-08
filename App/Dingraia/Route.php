@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Dingraia;
-use Closure;
 
 /**
  * 路由管理器，处理HTTP请求并将其分发到对应的控制器方法，支持中间件
@@ -152,12 +151,12 @@ class Route
     {
         $requestMethod = $this->getRequestMethod();
         $requestUri = $_SERVER['REQUEST_URI'];
-        if (mb_substr($requestUri, -1, 1, 'UTF-8') != '/') {
-            $requestUri = $requestUri . '/';
-        }
         $path = strtok($requestUri, '?');
         $path = preg_replace('#^/index\.php#', '', $path);
         $path = $path ?: '/';
+        if (mb_substr($path, -1, 1, 'UTF-8') != '/') {
+            $path = $path . '/';
+        }
 
         foreach ($this->routes as $routePath => $methods) {
             $params = [];
@@ -227,19 +226,23 @@ class Route
     private function matchRoute(string $route, string $path, array &$params): bool
     {
         $params = [];
-        // 处理静态路由
+        //静态路由
         if ($route === $path) {
             return true;
         }
-        // 处理动态路由（带参数）
+        //动态路由（带参数）
         if (str_contains($route, '<')) {
             $routeRegex = $this->convertRouteToRegex($route);
             if (preg_match($routeRegex, $path, $matches)) {
-                $params = array_slice($matches, 1);
+                foreach ($matches as $key => $value) {
+                    if (!is_numeric($key)) {
+                        $params[$key] = $value;
+                    }
+                }
+                $this->currentParams = $params;
                 return true;
             }
         }
-
         return false;
     }
 
@@ -269,9 +272,9 @@ class Route
             $controllerName = $action[0];
             $methodName = $action[1];
             $controller = new $controllerName();
-            return call_user_func_array([$controller, $methodName], $params);
+            return $controller->$methodName(...$params);
         } elseif (is_callable($action)) {
-            return call_user_func_array($action, $params);
+            return $action(...$params);
         }
         return null;
     }
