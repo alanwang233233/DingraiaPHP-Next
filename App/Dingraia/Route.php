@@ -28,7 +28,7 @@ class Route
 
     /**
      * 当前匹配的路由动作
-     * @var callable|array|null
+     * @var callable|array|string|null
      */
     private $currentAction = null;
 
@@ -36,11 +36,11 @@ class Route
      * 注册GET请求的路由
      *
      * @param string|array $path 路由路径
-     * @param callable|array $action 路由匹配时执行的动作
+     * @param callable|array|string $action 路由匹配时执行的动作
      * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function get(string|array $path, callable|array $action, array $middleware = []): static
+    public function get(string|array $path, callable|array|string $action, array $middleware = []): static
     {
         return $this->map(['GET'], $path, $action, $middleware);
     }
@@ -50,11 +50,11 @@ class Route
      *
      * @param string|array $methods 支持的HTTP请求方法数组，如['GET', 'POST']
      * @param string|array $paths 路由路径
-     * @param callable|array $action 路由匹配时执行的动作，可以是回调函数或控制器方法数组
+     * @param callable|array|string $action 路由匹配时执行的动作，可以是回调函数或控制器方法数组
      * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function map(string|array $methods, string|array $paths, callable|array $action, array $middleware = []): static
+    public function map(string|array $methods, string|array $paths, callable|array|string $action, array $middleware = []): static
     {
         $methods = array_map('strtoupper', is_string($methods) ? [$methods] : $methods);
         $paths = is_string($paths) ? [$paths] : $paths;
@@ -78,11 +78,11 @@ class Route
      * 注册POST请求的路由
      *
      * @param string|array $path 路由路径
-     * @param callable|array $action 路由匹配时执行的动作
+     * @param callable|array|string $action 路由匹配时执行的动作
      * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function post(string|array $path, callable|array $action, array $middleware = []): static
+    public function post(string|array $path, callable|array|string $action, array $middleware = []): static
     {
         return $this->map(['POST'], $path, $action, $middleware);
     }
@@ -91,11 +91,11 @@ class Route
      * 注册PUT请求的路由
      *
      * @param string $path 路由路径
-     * @param callable|array $action 路由匹配时执行的动作
+     * @param callable|array|string $action 路由匹配时执行的动作
      * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function put(string $path, callable|array $action, array $middleware = []): static
+    public function put(string $path, callable|array|string $action, array $middleware = []): static
     {
         return $this->map(['PUT'], $path, $action, $middleware);
     }
@@ -104,11 +104,11 @@ class Route
      * 注册DELETE请求的路由
      *
      * @param string $path 路由路径
-     * @param callable|array $action 路由匹配时执行的动作
+     * @param callable|array|string $action 路由匹配时执行的动作
      * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function delete(string $path, callable|array $action, array $middleware = []): static
+    public function delete(string $path, callable|array|string $action, array $middleware = []): static
     {
         return $this->map(['DELETE'], $path, $action, $middleware);
     }
@@ -117,11 +117,11 @@ class Route
      * 注册支持所有HTTP请求方法的路由
      *
      * @param string $path 路由路径
-     * @param callable|array $action 路由匹配时执行的动作
+     * @param callable|array|string $action 路由匹配时执行的动作
      * @param array $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function any(string $path, callable|array $action, array $middleware = []): static
+    public function any(string $path, callable|array|string $action, array $middleware = []): static
     {
         return $this->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], $path, $action, $middleware);
     }
@@ -262,11 +262,11 @@ class Route
     /**
      * 执行路由匹配后的处理动作
      *
-     * @param callable|array $action 要执行的动作，可以是回调函数或控制器方法数组
+     * @param callable|array|string $action 要执行的动作，可以是回调函数或控制器方法数组
      * @param array $params 传递给动作的参数
      * @return mixed 动作执行结果
      */
-    private function executeAction(callable|array $action, array $params): mixed
+    private function executeAction(callable|array|string $action, array $params): mixed
     {
         if (is_array($action)) {
             $controllerName = $action[0];
@@ -275,6 +275,12 @@ class Route
             return $controller->$methodName(...$params);
         } elseif (is_callable($action)) {
             return $action(...$params);
+        } elseif (is_string($action)) {
+            $action = explode('@', $action);
+            $controllerName = $action[0];
+            $methodName = $action[1];
+            $controller = new $controllerName();
+            return $controller->$methodName(...$params);
         }
         return null;
     }
