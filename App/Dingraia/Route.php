@@ -9,7 +9,7 @@ class Route
 {
     /**
      * 存储注册的路由信息
-     * 格式: [路径 => [请求方法 => ['controller' => 处理动作, 'middleware' => 中间件数组]]
+     * 格式: [路径 => [请求方法 => ['controller' => 处理动作, 'middleware' => 中间件]]
      * @var array
      */
     public array $routes = [];
