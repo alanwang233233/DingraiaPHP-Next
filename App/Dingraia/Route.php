@@ -10,6 +10,13 @@ class Route
     /**
      * 存储注册的路由信息
      * 格式: [路径 => [请求方法 => ['controller' => 处理动作, 'middleware' => 中间件]]
+     * 示例:
+     * [
+     *     '/path' => [
+     *         'GET' => ['controller' => ['controllerName','actionName'], 'middleware' => ['Auth']],
+     *         'POST' => ['controller' => 'Controller@action', 'middleware' => ['Auth']]
+     *     ]
+     * ]
      * @var array
      */
     public array $routes = [];
@@ -37,10 +44,10 @@ class Route
      *
      * @param string|array $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
-     * @param array $middleware 该路由使用的中间件
+     * @param array|string|object $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function get(string|array $path, callable|array|string $action, array $middleware = []): static
+    public function get(string|array $path, callable|array|string $action, array|string|object $middleware = []): static
     {
         return $this->map(['GET'], $path, $action, $middleware);
     }
@@ -51,10 +58,10 @@ class Route
      * @param string|array $methods 支持的HTTP请求方法数组，如['GET', 'POST']
      * @param string|array $paths 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作，可以是回调函数或控制器方法数组
-     * @param array $middleware 该路由使用的中间件
+     * @param array|string|object $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function map(string|array $methods, string|array $paths, callable|array|string $action, array $middleware = []): static
+    public function map(string|array $methods, string|array $paths, callable|array|string $action, array|string|object $middleware = []): static
     {
         $methods = array_map('strtoupper', is_string($methods) ? [$methods] : $methods);
         $paths = is_string($paths) ? [$paths] : $paths;
@@ -66,7 +73,7 @@ class Route
             foreach ($methods as $method) {
                 $this->routes[$path][$method] = [
                     'action' => $action,
-                    'middleware' => $middleware
+                    'middleware' => is_array($middleware) ? $middleware : [$middleware]
                 ];
             }
         }
@@ -79,10 +86,10 @@ class Route
      *
      * @param string|array $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
-     * @param array $middleware 该路由使用的中间件
+     * @param array|string|object $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function post(string|array $path, callable|array|string $action, array $middleware = []): static
+    public function post(string|array $path, callable|array|string $action, array|string|object $middleware = []): static
     {
         return $this->map(['POST'], $path, $action, $middleware);
     }
@@ -92,10 +99,10 @@ class Route
      *
      * @param string $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
-     * @param array $middleware 该路由使用的中间件
+     * @param array|string|object $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function put(string $path, callable|array|string $action, array $middleware = []): static
+    public function put(string $path, callable|array|string $action, array|string|object $middleware = []): static
     {
         return $this->map(['PUT'], $path, $action, $middleware);
     }
@@ -105,10 +112,10 @@ class Route
      *
      * @param string $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
-     * @param array $middleware 该路由使用的中间件
+     * @param array|string|object $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function delete(string $path, callable|array|string $action, array $middleware = []): static
+    public function delete(string $path, callable|array|string $action, array|string|object $middleware = []): static
     {
         return $this->map(['DELETE'], $path, $action, $middleware);
     }
@@ -118,10 +125,10 @@ class Route
      *
      * @param string $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
-     * @param array $middleware 该路由使用的中间件
+     * @param array|string|object $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function any(string $path, callable|array|string $action, array $middleware = []): static
+    public function any(string $path, callable|array|string $action, array|string|object $middleware = []): static
     {
         return $this->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], $path, $action, $middleware);
     }
@@ -129,16 +136,15 @@ class Route
     /**
      * 添加全局中间件，将应用于所有路由
      *
-     * @param string|array $middleware 中间件类名或数组
+     * @param string|array|object $middleware 中间件类名或数组
      * @return $this
      */
-    public function middleware(string|array $middleware): static
+    public function middleware(string|array|object $middleware): static
     {
         $this->globalMiddleware = array_merge(
             $this->globalMiddleware,
             is_array($middleware) ? $middleware : [$middleware]
         );
-
         return $this;
     }
 
