@@ -28,9 +28,9 @@ class MessageRoute
      * @param string|array $routes
      * @param array|string|callable $action 方法
      * @param array|string|object $middleware 中间件
-     * @return void
+     * @return MessageRoute
      */
-    public function map(string|array $routes, array|string|callable $action, array|string|object $middleware): void
+    public function map(string|array $routes, array|string|callable $action, array|string|object $middleware): static
     {
         $routes = is_string($routes) ? [$routes] : $routes;
         foreach ($routes as $r) {
@@ -39,5 +39,6 @@ class MessageRoute
                 'middleware' => $middleware
             ];
         }
+        return $this;
     }
 }

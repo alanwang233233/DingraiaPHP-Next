@@ -45,7 +45,7 @@ class Route
      * @param string|array $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
      * @param array|string|object $middleware 该路由使用的中间件
-     * @return $this 返回当前Route实例，支持链式调用
+     * @return Route 返回当前Route实例，支持链式调用
      */
     public function get(string|array $path, callable|array|string $action, array|string|object $middleware = []): static
     {
@@ -59,19 +59,19 @@ class Route
      * @param string|array $paths 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作，可以是回调函数或控制器方法数组
      * @param array|string|object $middleware 该路由使用的中间件
-     * @return $this 返回当前Route实例，支持链式调用
+     * @return Route 返回当前Route实例，支持链式调用
      */
     public function map(string|array $methods, string|array $paths, callable|array|string $action, array|string|object $middleware = []): static
     {
         $methods = array_map('strtoupper', is_string($methods) ? [$methods] : $methods);
         $paths = is_string($paths) ? [$paths] : $paths;
 
-        foreach ($paths as $path) {
-            if (mb_substr($path, -1, 1, 'UTF-8') != '/') {
-                $path = $path . '/';
+        foreach ($paths as $p) {
+            if (mb_substr($p, -1, 1, 'UTF-8') != '/') {
+                $p = $p . '/';
             }
             foreach ($methods as $method) {
-                $this->routes[$path][$method] = [
+                $this->routes[$p][$method] = [
                     'action' => $action,
                     'middleware' => is_array($middleware) ? $middleware : [$middleware]
                 ];
@@ -87,7 +87,7 @@ class Route
      * @param string|array $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
      * @param array|string|object $middleware 该路由使用的中间件
-     * @return $this 返回当前Route实例，支持链式调用
+     * @return Route 返回当前Route实例，支持链式调用
      */
     public function post(string|array $path, callable|array|string $action, array|string|object $middleware = []): static
     {
@@ -100,7 +100,7 @@ class Route
      * @param string|array $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
      * @param array|string|object $middleware 该路由使用的中间件
-     * @return $this 返回当前Route实例，支持链式调用
+     * @return Route 返回当前Route实例，支持链式调用
      */
     public function put(string|array $path, callable|array|string $action, array|string|object $middleware = []): static
     {
@@ -113,7 +113,7 @@ class Route
      * @param string|array $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
      * @param array|string|object $middleware 该路由使用的中间件
-     * @return $this 返回当前Route实例，支持链式调用
+     * @return Route 返回当前Route实例，支持链式调用
      */
     public function delete(string|array $path, callable|array|string $action, array|string|object $middleware = []): static
     {
@@ -126,7 +126,7 @@ class Route
      * @param string|array $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
      * @param array|string|object $middleware 该路由使用的中间件
-     * @return $this 返回当前Route实例，支持链式调用
+     * @return Route 返回当前Route实例，支持链式调用
      */
     public function any(string|array $path, callable|array|string $action, array|string|object $middleware = []): static
     {
@@ -137,7 +137,7 @@ class Route
      * 添加全局中间件，将应用于所有路由
      *
      * @param string|array|object $middleware 中间件类名或数组
-     * @return $this
+     * @return Route
      */
     public function middleware(string|array|object $middleware): static
     {
