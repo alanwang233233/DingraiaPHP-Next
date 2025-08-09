@@ -97,7 +97,7 @@ class Route
     /**
      * 注册PUT请求的路由
      *
-     * @param string $path 路由路径
+     * @param string|array $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
      * @param array|string|object $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
@@ -110,7 +110,7 @@ class Route
     /**
      * 注册DELETE请求的路由
      *
-     * @param string $path 路由路径
+     * @param string|array $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
      * @param array|string|object $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
