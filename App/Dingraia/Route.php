@@ -102,7 +102,7 @@ class Route
      * @param array|string|object $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function put(string $path, callable|array|string $action, array|string|object $middleware = []): static
+    public function put(string|array $path, callable|array|string $action, array|string|object $middleware = []): static
     {
         return $this->map(['PUT'], $path, $action, $middleware);
     }
@@ -115,7 +115,7 @@ class Route
      * @param array|string|object $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function delete(string $path, callable|array|string $action, array|string|object $middleware = []): static
+    public function delete(string|array $path, callable|array|string $action, array|string|object $middleware = []): static
     {
         return $this->map(['DELETE'], $path, $action, $middleware);
     }
@@ -123,12 +123,12 @@ class Route
     /**
      * 注册支持所有HTTP请求方法的路由
      *
-     * @param string $path 路由路径
+     * @param string|array $path 路由路径
      * @param callable|array|string $action 路由匹配时执行的动作
      * @param array|string|object $middleware 该路由使用的中间件
      * @return $this 返回当前Route实例，支持链式调用
      */
-    public function any(string $path, callable|array|string $action, array|string|object $middleware = []): static
+    public function any(string|array $path, callable|array|string $action, array|string|object $middleware = []): static
     {
         return $this->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], $path, $action, $middleware);
     }
