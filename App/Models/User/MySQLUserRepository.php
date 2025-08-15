@@ -3,46 +3,32 @@
 namespace App\Models\User;
 
 use App\Tools;
-use PDO;
+use PDOException;
 use Random\RandomException;
-use ReflectionObject;
-use ReflectionProperty;
+use App\Models\Database\MySQL;
 
 class MySQLUserRepository extends AbstractUserRepository
 {
     use Tools;
 
-    private string $url;
-    private string $username;
-    private string $password;
-    private string $dbname;
-    /** @noinspection PhpMissingFieldTypeInspection */
-    private $conn;
-
     /**
      * MySQLConnector
-     * @param string $url
+     * @param string $host
      * @param string $username
      * @param string $password
      * @param string $dbname
      */
-    public function __construct(string $url, string $username, string $password, string $dbname)
+    public function __construct(string $host, string $username, string $password, string $dbname)
     {
-        $this->url = $url;
-        $this->username = $username;
-        $this->password = $password;
-        $this->dbname = $dbname;
-        $this->connect();
-    }
+        // 初始化数据库连接
+        MySQL::init([
+            'host' => $host,
+            'dbname' => $dbname,
+            'user' => $username,
+            'pwd' => $password,
+            'charset' => 'utf8mb4'
+        ]);
 
-    /**
-     * 连接到数据库
-     * @return void
-     */
-    private function connect(): void
-    {
-        $this->conn = new PDO("mysql:host=$this->url;dbname=$this->dbname", $this->username, $this->password);
-        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->createTableIfNotExists();
     }
 
@@ -59,7 +45,7 @@ class MySQLUserRepository extends AbstractUserRepository
                                      isAdmin BOOLEAN NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
 
-        $this->conn->exec($sql);
+        MySQL::exec($sql);
     }
 
     /**
@@ -68,7 +54,12 @@ class MySQLUserRepository extends AbstractUserRepository
      */
     public function checkConnection(): bool
     {
-        return $this->conn !== null;
+        try {
+            MySQL::pdo();
+            return true;
+        } catch (PDOException) {
+            return false;
+        }
     }
 
     /**
@@ -84,26 +75,25 @@ class MySQLUserRepository extends AbstractUserRepository
         $uid = $this->generateRandomInt();
         $uid = preg_replace('/[^a-zA-Z0-9_]/', '', $uid);
         $result = true;
+
         while ($result) {
             $uid = $this->generateRandomInt();
             $result = $this->checkUidExists($uid);
         }
+
         $user = new User($uid, $userId, $username, $isAdmin, []);
-        $stmt = $this->conn->prepare("INSERT INTO users (uid,userId, username, isAdmin) 
-                                      VALUES (:uid,:userId, :username, :isAdmin)");
-        $stmt->bindParam(':uid', $uid);
-        $stmt->bindParam(':userId', $userId);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':isAdmin', $isAdmin, PDO::PARAM_BOOL);
-        $stmt->execute();
-        $stmt2 = $this->conn->prepare("SELECT * FROM users WHERE userId = " . $user->userId);
-        $stmt2->execute();
-        // 测试
-        /*        $sql = $this->conn->prepare("CREATE TABLE IF NOT EXISTS `$uid` (
-                            uid INT PRIMARY KEY NOT NULL UNIQUE ,
-                            FOREIGN KEY (uid) REFERENCES users(uid)
-                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
-                $sql->execute();*/
+
+        // 插入用户数据
+        MySQL::exec(
+            "INSERT INTO users (uid, userId, username, isAdmin) 
+             VALUES (:uid, :userId, :username, :isAdmin)",
+            [
+                ':uid' => $uid,
+                ':userId' => $userId,
+                ':username' => $username,
+                ':isAdmin' => $isAdmin ? 1 : 0
+            ]
+        );
 
         return $user;
     }
@@ -115,10 +105,12 @@ class MySQLUserRepository extends AbstractUserRepository
      */
     public function checkUidExists(int $uid): bool
     {
-        $stmt = $this->conn->prepare("SELECT 1 FROM users WHERE uid = :uid");
-        $stmt->bindParam(':uid', $uid, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchColumn() !== false;
+        $result = MySQL::getOne(
+            "SELECT 1 FROM users WHERE uid = :uid",
+            [':uid' => $uid]
+        );
+
+        return $result !== null;
     }
 
 
@@ -130,22 +122,21 @@ class MySQLUserRepository extends AbstractUserRepository
     public function findUserByUsername(string $username): array
     {
         $users = [];
-        $pattern = "%$username%"; //模糊匹配模式
+        $pattern = "%$username%"; // 模糊匹配模式
 
-        $stmt = $this->conn->prepare("SELECT * FROM users WHERE username LIKE :pattern");
-        $stmt->bindParam(':pattern', $pattern, PDO::PARAM_STR);
-        $stmt->execute();
+        $results = MySQL::getAll(
+            "SELECT * FROM users WHERE username LIKE :pattern",
+            [':pattern' => $pattern]
+        );
 
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($results as $row) {
-            $user = new User($row['uid'], $row['userId'], $row['username'], (bool)$row['isAdmin'], []);
-            /*            $uid = $row['uid'];
-                        $uid = preg_replace('/[^a-zA-Z0-9_]/', '', $uid);
-                        $stmt = $this->conn->prepare("SELECT * FROM `$uid` WHERE uid = :uid");
-                        $stmt->bindParam(':uid', $uid, PDO::PARAM_INT);
-                        $stmt->execute();
-                        $customData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        $user->customData = $customData;*/
+            $user = new User(
+                $row['uid'],
+                $row['userId'],
+                $row['username'],
+                (bool)$row['isAdmin'],
+                []
+            );
             $users[] = $user;
         }
 
@@ -159,29 +150,18 @@ class MySQLUserRepository extends AbstractUserRepository
      */
     public function updateUserData(User $user): bool
     {
-        $reflection = new ReflectionObject($user);
-        $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
+        $rowCount = MySQL::exec(
+            "UPDATE users 
+             SET username = :username, 
+                 isAdmin = :isAdmin
+             WHERE userId = :userId",
+            [
+                ':userId' => $user->userId,
+                ':username' => $user->username,
+                ':isAdmin' => $user->isAdmin ? 1 : 0
+            ]
+        );
 
-        $customData = [];
-        foreach ($properties as $property) {
-            $name = $property->getName();
-            if (!in_array($name, ['userId', 'username', 'dingtalkId', 'isAdmin'])) {
-                $customData[$name] = $property->getValue($user);
-            }
-        }
-
-        $customDataJson = json_encode($customData);
-
-        $stmt = $this->conn->prepare("UPDATE users 
-                                      SET username = :username, 
-                                          isAdmin = :isAdmin
-                                      WHERE userId = :userId");
-        $stmt->bindParam(':userId', $user->userId);
-        $stmt->bindParam(':username', $user->username);
-        $stmt->bindParam(':isAdmin', $user->isAdmin, PDO::PARAM_BOOL);
-        $stmt->bindParam(':customData', $customDataJson);
-
-        return $stmt->execute();
+        return $rowCount > 0;
     }
 }
-
