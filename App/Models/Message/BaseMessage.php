@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\RobotMessage;
+namespace App\Models\Message;
 
 use App\Tools;
 use Exception;

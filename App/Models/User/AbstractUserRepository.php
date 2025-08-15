@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Models\Database;
+namespace App\Models\User;
 
-use App\Models\User;
-
-abstract class AbstractDatabaseConnector
+abstract class AbstractUserRepository
 {
     private string $url;
     private string $dbname;

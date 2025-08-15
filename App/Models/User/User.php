@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Models;
-use App\Models\Database\DatabaseConnector;
+namespace App\Models\User;
+
 class User
 {
     public int $uid;
@@ -9,7 +9,6 @@ class User
     public string $username;
     public bool $isAdmin;
     public array $customData;
-
     public function __construct($uid, $userId, $username, $isAdmin, $customData)
     {
         $this->uid = $uid;
@@ -17,9 +16,5 @@ class User
         $this->username = $username;
         $this->isAdmin = $isAdmin;
         $this->customData = $customData;
-    }
-    public function updateToDatabase()
-    {
-
     }
 }

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Models\Database;
+namespace App\Models\User;
 
-use App\Models\User;
 use App\Tools;
 use PDO;
 use Random\RandomException;
 use ReflectionObject;
 use ReflectionProperty;
 
-class SQLiteConnector extends AbstractDatabaseConnector
+class SQLIteUserRepository extends AbstractUserRepository
 {
     use Tools;
 

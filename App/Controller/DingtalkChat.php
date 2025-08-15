@@ -3,8 +3,8 @@
 namespace App\Controller;
 class DingtalkChat
 {
-    public function main(): void
+    public function main($uid): void
     {
-        echo 'DingtalkChat';
+        echo $uid;
     }
 }

@@ -12,6 +12,14 @@ return function (Route $router) {
     $router->map('GET', '/', function () {
         echo "首页";
     });
-    $router->any('/chat/dingtalk/<uid>', [\App\Controller\DingtalkChat::class, 'main']);
+    $router->any(['/chat/dingtalk/<uid>','/chat/<uid>'], [\App\Controller\DingtalkChat::class, 'main'])
+        ->middleware(new class
+        {
+            public function handle($next): mixed
+            {
+                echo "中间件";
+                return $next();
+            }
+        });
 };
 
