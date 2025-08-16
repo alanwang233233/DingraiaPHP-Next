@@ -1,47 +1,58 @@
 <?php
+
 namespace App\Models\Database;
+
+use Exception;
 use PDO;
 use PDOException;
+
 class SQLite
 {
-    private static PDO $pdo;
-    private static string $file;
+    private PDO $pdo;
+    private string $file;
 
     /**
      * 初始化数据库连接
-     * @param string $file 数据库文件路径
+     * @param string $filename SQLite的.db数据库文件
+     * @throws Exception
      */
-    public static function init(string $file): void
+    public function __construct(string $filename)
     {
-        self::$file = $file;
+        if (!file_exists($filename)) {
+            throw new Exception('SQLite file not found: '.$filename);
+        }
+        $this->file = $filename;
+        try {
+            $this->init();
+        } catch (Exception $e) {
+            throw new Exception('SQLite Error: '.$e->getMessage());
+        }
     }
 
     /**
      * 获取PDO实例(单例模式)
-     * @return PDO
-     * @throws PDOException
+     * @return void
      */
-    private static function getPdo(): PDO
+    private function init(): void
     {
-        if (self::$pdo === null) {
-            $dsn = "sqlite:" . self::$file;
-            $options = [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false,
-            ];
+        $dsn = "sqlite:" . $this->file;
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ];
 
-            try {
-                self::$pdo = new PDO(
-                    $dsn,
-                    $options
-                );
-            } catch (PDOException $e) {
-                throw new PDOException("数据库连接失败: " . $e->getMessage());
-            }
+        try {
+            $this->pdo = new PDO(
+                $dsn,
+                $options
+            );
+        } catch (PDOException $e) {
+            throw new PDOException("Database connect fail:" . $e->getMessage());
         }
-        return self::$pdo;
     }
+
+
 
     /**
      * 查询单条记录
@@ -49,9 +60,9 @@ class SQLite
      * @param array $params 绑定参数
      * @return array|null 结果数组或null
      */
-    public static function getOne(string $sql, array $params = []): ?array
+    public function getOne(string $sql, array $params = []): ?array
     {
-        $stmt = self::getPdo()->prepare($sql);
+        $stmt = $this->pdo()->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetch() ?: null;
     }
@@ -62,9 +73,9 @@ class SQLite
      * @param array $params 绑定参数
      * @return array 结果集数组
      */
-    public static function getAll(string $sql, array $params = []): array
+    public function getAll(string $sql, array $params = []): array
     {
-        $stmt = self::getPdo()->prepare($sql);
+        $stmt = $this->pdo()->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll();
     }
@@ -75,9 +86,9 @@ class SQLite
      * @param array $params 绑定参数
      * @return int 影响行数
      */
-    public static function exec(string $sql, array $params = []): int
+    public function exec(string $sql, array $params = []): int
     {
-        $stmt = self::getPdo()->prepare($sql);
+        $stmt = $this->pdo()->prepare($sql);
         $stmt->execute($params);
         return $stmt->rowCount();
     }
@@ -86,41 +97,41 @@ class SQLite
      * 获取最后插入的ID
      * @return string
      */
-    public static function lastInsertId(): string
+    public function lastInsertId(): string
     {
-        return self::getPdo()->lastInsertId();
+        return $this->pdo()->lastInsertId();
     }
 
     /**
      * 开启事务
      */
-    public static function beginTransaction(): void
+    public function beginTransaction(): void
     {
-        self::getPdo()->beginTransaction();
+        $this->pdo()->beginTransaction();
     }
 
     /**
      * 提交事务
      */
-    public static function commit(): void
+    public function commit(): void
     {
-        self::getPdo()->commit();
+        $this->pdo()->commit();
     }
 
     /**
      * 回滚事务
      */
-    public static function rollback(): void
+    public function rollback(): void
     {
-        self::getPdo()->rollback();
+        $this->pdo()->rollback();
     }
 
     /**
      * 直接获取PDO实例
      * @return PDO
      */
-    public static function pdo(): PDO
+    public function pdo(): PDO
     {
-        return self::getPdo();
+        return $this->pdo;
     }
 }
