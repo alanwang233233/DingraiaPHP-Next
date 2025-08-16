@@ -2,8 +2,6 @@
 
 namespace App\Models\Cache;
 
-use Exception;
-
 abstract class AbstractCache
 {
     // 字符串操作
@@ -29,10 +27,7 @@ abstract class AbstractCache
 
     abstract public function lRange(string $key, int $start, int $stop): array;
 
-    /**
-     * 新列表
-     * @throws Exception
-     */
+/*
     public function newList($key, array $data): void
     {
         foreach ($data as $item) {
@@ -44,7 +39,7 @@ abstract class AbstractCache
                 $this->rPush($key, $item);
             }
         }
-    }
+    }*/
 
     abstract public function rPush(string $key, $value): int;
 

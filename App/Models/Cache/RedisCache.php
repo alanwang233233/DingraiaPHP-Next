@@ -11,14 +11,30 @@ class RedisCache extends AbstractCache
     private Redis $redis;
     private array $config;
 
-    public function __construct($host, $port = 6379, $password = '', $database = '')
+    /**
+     * 从配置文件加载配置或使用传入配置
+     * @param array $config
+     */
+    public function __construct(array $config = ['genshin'])
     {
-        $config = [
-            'host' => $host,
-            'port' => $port,
-            'password' => $password,
-            'database' => $database,
-        ];
+        if ($config === ['genshin']) {
+            $config = require_once APP_PATH . 'Config/Config.php';
+        }
+        if (!isset($config['host'])) {
+            throw new RuntimeException('Redis host is required');
+        }
+        if (!isset($config['port'])) {
+            $config['port'] = 6379;
+        }
+        if (!isset($config['timeout'])) {
+            $config['timeout'] = 0;
+        }
+        if (!isset($config['password'])) {
+            $config['password'] = '';
+        }
+        if (!isset($config['database'])) {
+            throw new RuntimeException('Redis database is required');
+        }
         $this->config = $config;
         $this->connect();
     }
@@ -45,7 +61,6 @@ class RedisCache extends AbstractCache
         }
     }
 
-    // 字符串操作
     public function set(string $key, $value, int $ttl = 0): bool
     {
         if ($ttl > 0) {
@@ -70,7 +85,6 @@ class RedisCache extends AbstractCache
         return $this->redis->exists($key);
     }
 
-    // 列表操作
 
     public function lPush(string $key, $value): int
     {
