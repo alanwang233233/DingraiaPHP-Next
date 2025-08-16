@@ -1,50 +1,37 @@
 <?php
 
 namespace App\Dingraia\Plugin;
-abstract class SamplePlugin
-{
-    /**
-     * @return string
-     */
-    public function getUpdateUrl(): string
+abstract class SamplePlugin implements PluginInterface {
+    public function getName(): string
     {
-        return 'https://update.example.com/' . $this->getName() . '.json';
+        return 'SamplePlugin';
     }
-
-    /**
-     * @return string
-     */
-    abstract public function getName(): string;
-
-    /**
-     * @return bool
-     */
-    public function check(): bool
+    public function getDescription(): string
     {
-        if ($this->getAuthor() && $this->getVersion() && $this->getDescription() && $this->getName() && $this->getEventList()) {
-            return true;
-        } else {
-            return false;
-        }
+        return '这是一个示例插件';
     }
-
-    /**
-     * @return string
-     */
-    abstract public function getAuthor(): string;
-
-    /**
-     * @return string
-     */
-    abstract public function getVersion(): string;
-
-    /**
-     * @return string
-     */
-    abstract public function getDescription(): string;
-
-    /**
-     * @return array
-     */
-    abstract public function getEventList(): array;
+    public function activate(): bool
+    {
+        return true;
+    }
+    public function deactivate(): bool
+    {
+        return true;
+    }
+    public function install(): bool
+    {
+        return true;
+    }
+    public function uninstall(): bool
+    {
+        return true;
+    }
+    public function getVersion(): string
+    {
+        return '1.0.0';
+    }
+    public function getAuthor(): string
+    {
+        return 'DingraiaPHP';
+    }
 }
