@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Dingraia\Plugin;
+use App\Dingraia\Interface\PluginInterface;
 abstract class SamplePlugin implements PluginInterface {
     public function getName(): string
     {
