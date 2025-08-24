@@ -2,22 +2,26 @@
 
 namespace App\Models\Database;
 
+use App\Dingraia\Interface\DatabaseInterface;
 use Exception;
 use PDO;
 use PDOException;
 
-class SQLite
+class SQLite implements DatabaseInterface
 {
     private PDO $pdo;
     private string $file;
 
     /**
      * 初始化数据库连接
-     * @param string $filename SQLite的.db数据库文件
+     * @param string|array $filename SQLite的.db数据库文件
      * @throws Exception
      */
-    public function __construct(string $filename)
+    public function __construct(string|array $filename)
     {
+        if (is_array($filename)) {
+            $filename = $filename[0];
+        }
         if (!file_exists($filename)) {
             throw new Exception('SQLite file not found: '.$filename);
         }

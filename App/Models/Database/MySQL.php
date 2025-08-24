@@ -5,8 +5,9 @@ namespace App\Models\Database;
 use Exception;
 use PDO;
 use PDOException;
+use App\Dingraia\Interface\DatabaseInterface;
 
-class MySQL
+class MySQL implements DatabaseInterface
 {
     private PDO $pdo;
     private array $config;
