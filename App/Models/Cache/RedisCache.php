@@ -32,7 +32,7 @@ class RedisCache extends AbstractCache
         if (!isset($config['password'])) {
             $config['password'] = '';
         }
-        if (!isset($config['database'])) {
+        if (!isset($config['dbname'])) {
             throw new RuntimeException('Redis database is required');
         }
         $this->config = $config;
